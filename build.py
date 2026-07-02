@@ -55,9 +55,8 @@ html = template.render(
 
 # ── Write output ───────────────────────────────────────────────────────
 (OUTPUT / "index.html").write_text(html, encoding="utf-8")
-shutil.copy(BASE / "static" / "style.css", OUTPUT / "style.css")
-shutil.copy(BASE / "static" / "profile_photo.jpeg", OUTPUT / "profile_photo.jpeg")
-shutil.copy(BASE / "static" / "examhub.png", OUTPUT / "examhub.png")
+for file in (BASE / "static").iterdir():
+    shutil.copy(file, OUTPUT / file.name)
 
 print("✅  Site built successfully!")
 print(f"📁  Output → {OUTPUT.resolve()}")
