@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{ site.title }}</title>
+<meta name="description" content="{{ site.description }}">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<input type="checkbox" id="theme-toggle" class="visually-hidden" aria-hidden="true">
+<input type="checkbox" id="nav-toggle"   class="visually-hidden" aria-hidden="true">
+
+<div class="site">
+
+  <!-- ── Navbar ── -->
+  <nav class="navbar">
+    <div class="wrap nav-inner">
+      <div class="nav-logo grad-text">Portfolio</div>
+
+      <div class="nav-links">
+        {% for link in nav_links %}
+        <a href="#{{ link.id }}">{{ link.name }}</a>
+        {% endfor %}
+        <label for="theme-toggle" class="icon-btn" tabindex="0" aria-label="Toggle theme" style="margin-left:0.5rem;">
+          {{ icon('sun',  cls='theme-icon-sun',  size=16) | safe }}
+          {{ icon('moon', cls='theme-icon-moon', size=16) | safe }}
+        </label>
+      </div>
+
+      <div style="display:flex;align-items:center;gap:0.5rem;">
+        <label for="theme-toggle" class="icon-btn menu-toggle-btn" tabindex="0" aria-label="Toggle theme" style="display:none;">
+        </label>
+        <label for="nav-toggle" class="icon-btn menu-toggle-btn" tabindex="0" aria-label="Toggle menu">
+          {{ icon('menu', cls='icon-menu', size=18) | safe }}
+          {{ icon('close', cls='icon-close', size=18) | safe }}
+        </label>
+      </div>
+    </div>
+    <div class="wrap mobile-menu">
+      {% for link in nav_links %}
+      <a href="#{{ link.id }}">{{ link.name }}</a>
+      {% endfor %}
+    </div>
+  </nav>
+
+  <main>
+
+    <!-- ── Hero ── -->
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div>
+          <div class="hero-tag">
+            {{ icon('github', size=13) | safe }}
+            <span>Open to opportunities</span>
+          </div>
+          <h1 class="hero-name">{{ hero.first_name }}<br>
+            <span class="grad-text">{{ hero.last_name }}</span>
+          </h1>
+          <div class="hero-roles">
+            <span class="hero-role">{{ hero.role }}</span>
+            <span class="hero-subrole">{{ hero.subrole }}</span>
+          </div>
+          <p class="hero-blurb">{{ hero.blurb }}</p>
+          <div class="social-row">
+            {% for s in socials %}
+            <a href="{{ s.url }}" target="_blank" rel="noopener noreferrer" aria-label="{{ s.name }}">
+              {{ icon(s.name, size=18) | safe }}
+            </a>
+            {% endfor %}
+          </div>
+        </div>
+
+        <div class="hero-photo-wrap">
+          <div class="hero-photo-outer">
+            <div class="hero-photo-inner">
+              {% if hero.photo %}
+              <img src="{{ hero.photo }}" alt="{{ hero.first_name }} {{ hero.last_name }}">
+              {% else %}
+              <div class="hero-photo-placeholder">Add your photo in content.py</div>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── About ── -->
+    <section id="about">
+      <div class="wrap">
+        <span class="eyebrow">Who I am</span>
+        <h2 class="section-heading">About <span class="grad-text">Me</span></h2>
+        <div class="section-bar"></div>
+        <div class="grid-2">
+          <div class="about-text">
+            {% for p in about.paragraphs %}
+            <p>{{ p }}</p>
+            {% endfor %}
+          </div>
+          <div style="display:flex;flex-direction:column;gap:1rem;">
+            {% for card in about.cards %}
+            <div class="glass-card about-card">
+              <h3>{{ card.title }}</h3>
+              <p>{{ card.text }}</p>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Education ── -->
+    <section id="education">
+      <div class="wrap">
+        <span class="eyebrow">Academic background</span>
+        <h2 class="section-heading">My <span class="grad-text">Education</span></h2>
+        <div class="section-bar"></div>
+        {% for e in education %}
+        <div class="glass-card timeline-card">
+          <div class="timeline-top">
+            <div>
+              <h3>{{ e.degree }}</h3>
+              <p class="school">{{ e.school }}</p>
+            </div>
+            <span class="badge-{{ e.accent }}">{{ e.period }}</span>
+          </div>
+          <p class="desc">{{ e.text }}</p>
+        </div>
+        {% endfor %}
+      </div>
+    </section>
+
+    <!-- ── Experience ── -->
+    <section id="experience">
+      <div class="wrap">
+        <span class="eyebrow">Work history</span>
+        <h2 class="section-heading">My <span class="grad-text">Experience</span></h2>
+        <div class="section-bar"></div>
+        {% for job in experience %}
+        <div class="glass-card timeline-card exp-card">
+          <div class="timeline-top">
+            <div>
+              <h3>{{ job.role }}</h3>
+              <p class="school">{{ job.org }}</p>
+            </div>
+            <span class="badge-pill">{{ job.period }}</span>
+          </div>
+          <ul class="exp-list">
+            {% for b in job.bullets %}
+            <li>{{ b }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+        {% endfor %}
+      </div>
+    </section>
+
+    <!-- ── Projects ── -->
+    <section id="projects">
+      <div class="wrap">
+        <span class="eyebrow">Things I've built</span>
+        <h2 class="section-heading">My <span class="grad-text">Projects</span></h2>
+        <div class="section-bar"></div>
+        <div class="grid-3">
+          {% for p in projects %}
+          <div class="project-card">
+            <div class="project-image">
+              {% if p.image %}
+              <img src="{{ p.image }}" alt="{{ p.title }}">
+              {% else %}
+              <div class="project-image-placeholder">{{ p.title }}</div>
+              {% endif %}
+            </div>
+            <div class="project-body">
+              <h3>{{ p.title }}</h3>
+              <p>{{ p.description }}</p>
+              <div class="tech-row">
+                {% for t in p.tech %}
+                <span class="tech-pill">{{ t }}</span>
+                {% endfor %}
+              </div>
+              <a class="project-link" href="{{ p.link }}" target="_blank" rel="noopener noreferrer">
+                View Project {{ icon('external', size=14) | safe }}
+              </a>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Skills ── -->
+    <section id="skills">
+      <div class="wrap">
+        <span class="eyebrow">What I work with</span>
+        <h2 class="section-heading">My <span class="grad-text">Skills</span></h2>
+        <div class="section-bar"></div>
+        <div class="grid-3">
+          {% for cat in skills %}
+          <div class="glass-card skill-card">
+            <h3 class="grad-text">{{ cat.category }}</h3>
+            <div class="skill-pills">
+              {% for s in cat.skills %}
+              <span class="skill-pill">{{ s }}</span>
+              {% endfor %}
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Achievements ── -->
+    <section id="achievements">
+      <div class="wrap">
+        <span class="eyebrow">Recognition</span>
+        <h2 class="section-heading">Certifications &amp; <span class="grad-text">Achievements</span></h2>
+        <div class="section-bar"></div>
+        <div class="grid-2">
+          {% for a in achievements %}
+          <div class="glass-card achieve-card">
+            <div class="achieve-icon">{{ icon(a.icon, size=22) | safe }}</div>
+            <div>
+              <h3>{{ a.title }}</h3>
+              <p>{{ a.text }}</p>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Clubs (only shown if non-empty) ── -->
+    {% if clubs %}
+    <section id="clubs">
+      <div class="wrap">
+        <span class="eyebrow">Community</span>
+        <h2 class="section-heading">Clubs &amp; <span class="grad-text">Communities</span></h2>
+        <div class="section-bar"></div>
+        <div class="grid-2">
+          {% for c in clubs %}
+          <div class="glass-card achieve-card">
+            <div class="achieve-icon club-icon">{{ icon('users', size=22) | safe }}</div>
+            <div>
+              <h3>{{ c.title }}</h3>
+              <p class="club-role">{{ c.role }}</p>
+              <p class="club-detail">{{ c.text }}</p>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+    {% endif %}
+
+    <!-- ── Contact ── -->
+    <section id="contact">
+      <div class="wrap">
+        <span class="eyebrow">Let's talk</span>
+        <h2 class="section-heading">Get In <span class="grad-text">Touch</span></h2>
+        <div class="section-bar"></div>
+        <div class="grid-2">
+          <div class="glass-card contact-card">
+            <div class="contact-icon-wrap">{{ icon('mail', size=22) | safe }}</div>
+            <span class="contact-label">Email</span>
+            <a class="contact-value" href="mailto:{{ contact.email }}">{{ contact.email }}</a>
+          </div>
+          <div class="glass-card contact-card violet">
+            <div class="contact-icon-wrap">{{ icon('phone', size=22) | safe }}</div>
+            <span class="contact-label">Phone</span>
+            <a class="contact-value" href="{{ contact.phone_href }}">{{ contact.phone }}</a>
+          </div>
+        </div>
+        <p class="contact-note">
+          Feel free to reach out — I'm always excited to connect and discuss new opportunities!
+        </p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ── Footer ── -->
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <h3 class="grad-text">{{ footer.name }}</h3>
+          <p>{{ footer.tagline }}</p>
+        </div>
+        <div class="footer-col">
+          <h4>Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Connect</h4>
+          <div class="footer-socials">
+            {% for s in socials %}
+            <a href="{{ s.url }}" target="_blank" rel="noopener noreferrer" aria-label="{{ s.name }}">
+              {{ icon(s.name, size=16) | safe }}
+            </a>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>{{ footer.copyright }}</p>
+      </div>
+    </div>
+  </footer>
+
+</div>
+</body>
+</html>
