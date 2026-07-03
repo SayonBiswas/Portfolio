@@ -895,3 +895,35 @@ a:focus-visible, label:focus-visible {
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition: none !important; animation: none !important; }
 }
+
+/* ── Project dual buttons ── */
+.project-btns {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  margin-top: auto;
+}
+
+.project-link-ghost {
+  background: transparent !important;
+  color: var(--fg2) !important;
+  border: 1px solid var(--border2) !important;
+  box-shadow: none !important;
+}
+
+.project-link-ghost:hover {
+  border-color: var(--cyan) !important;
+  color: var(--cyan) !important;
+  box-shadow: 0 4px 12px rgba(34,211,238,0.12) !important;
+}
+
+/* ── Light mode: black stroke only on plain white text in headings (not gradient spans) ── */
+#theme-toggle:checked ~ .site .hero-name:not(.grad-text),
+#theme-toggle:checked ~ .site .section-heading {
+  -webkit-text-stroke: 1.5px #000000;
+}
+/* Remove stroke from the gradient (blue) parts inside headings */
+#theme-toggle:checked ~ .site .section-heading .grad-text,
+#theme-toggle:checked ~ .site .hero-name .grad-text {
+  -webkit-text-stroke: 0;
+}

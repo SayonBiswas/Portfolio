@@ -102,15 +102,23 @@ PROJECTS = [
         "title": "IWT Examination Web Application",
         "description": "A comprehensive backend web application featuring a functional dashboard, secure user authentication, and a dynamic examination system with a relational database.",
         "tech": ["JSP", "PostgreSQL", "SQL"],
-        "link": "https://github.com/SayonBiswas/IWT",
-        "image": "examhub.png",  # add a screenshot URL if you have one
+        "github": "https://github.com/SayonBiswas/IWT",
+        "live": "https://examhub-q9ez.onrender.com",
+        "image": "examhub.png",
     },
     {
         "title": "Silicon Campus Hub",
         "description": "Centralized codebase for the Python summer internship project. Collaborated on REST API integration, ensuring smooth version control and team code management.",
         "tech": ["Python", "REST APIs", "GitHub"],
-        "link": "https://github.com/SayonBiswas/Summer-Internship-Python-Group-18",
-        "image": "",  # add a screenshot URL if you have one
+        "github": "https://github.com/SayonBiswas/Summer-Internship-Python-Group-18",
+    },
+    {
+        "title": "Student Management Website",
+        "description": "A full-featured student management web application for managing student records, with a clean interface and robust backend functionality.",
+        "tech": ["HTML", "CSS", "JavaScript"],
+        "github": "https://github.com/SayonBiswas/Student_Management_Website",
+        "live": "https://student-management-website-iirr.onrender.com",
+        "image": "student_management.png",
     },
 ]
 
@@ -156,5 +164,5 @@ CONTACT = {
 FOOTER = {
     "name": "Sayon Biswas",
     "tagline": "Python Developer & Aspiring Data Scientist",
-    "copyright": "\u00a9 2026 Sayon Biswas. All rights reserved. Built with Python.",
+    "copyright": "\u00a9 2025 Sayon Biswas. All rights reserved. Built with Python.",
 }
