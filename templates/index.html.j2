@@ -12,10 +12,6 @@
 </head>
 <body>
 
-<!-- Lightbox toggles (one per certificate image) -->
-{% for a in achievements %}{% if a.image %}<input type="checkbox" id="lb_a{{ loop.index }}" class="lightbox-toggle visually-hidden">{% endif %}{% endfor %}
-{% for c in certifications %}{% if c.image %}<input type="checkbox" id="lb_c{{ loop.index }}" class="lightbox-toggle visually-hidden">{% endif %}{% endfor %}
-
 <input type="checkbox" id="theme-toggle" class="visually-hidden" aria-hidden="true">
 <input type="checkbox" id="nav-toggle"   class="visually-hidden" aria-hidden="true">
 
@@ -272,10 +268,9 @@
           {% for a in achievements %}
           <div class="glass-card achieve-card" style="flex-direction:column;">
             {% if a.image %}
-            <label for="lb_a{{ loop.index }}" class="lightbox-label">
-              <img src="{{ a.image }}" alt="{{ a.title }}"
-                style="width:100%;height:10rem;object-fit:cover;border-radius:0.4rem;margin-bottom:1rem;">
-            </label>
+            <a href="{{ a.image }}" target="_blank" rel="noopener">
+              <img src="{{ a.image }}" alt="{{ a.title }}" class="achievement-thumb">
+            </a>
             {% endif %}
             <div style="display:flex;gap:1rem;align-items:flex-start;">
               <div class="achieve-icon">{{ icon(a.icon, size=20) | safe }}</div>
@@ -293,10 +288,9 @@
           {% for c in certifications %}
           <div class="glass-card achieve-card" style="flex-direction:column;">
             {% if c.image %}
-            <label for="lb_c{{ loop.index }}" class="lightbox-label">
-              <img src="{{ c.image }}" alt="{{ c.title }}"
-                style="width:100%;height:10rem;object-fit:cover;border-radius:0.4rem;margin-bottom:1rem;">
-            </label>
+            <a href="{{ c.image }}" target="_blank" rel="noopener">
+              <img src="{{ c.image }}" alt="{{ c.title }}" class="achievement-thumb">
+            </a>
             {% endif %}
             <div style="display:flex;gap:1rem;align-items:flex-start;">
               <div class="achieve-icon cert-icon">{{ icon(c.icon, size=20) | safe }}</div>
@@ -390,21 +384,6 @@
       <div class="footer-bottom">{{ footer.copyright }}</div>
     </div>
   </footer>
-
-  <!-- ── Lightbox overlays ── -->
-  {% for a in achievements %}{% if a.image %}
-  <label for="lb_a{{ loop.index }}" class="lightbox-overlay">
-    <span class="lightbox-close">&times;</span>
-    <img src="{{ a.image }}" alt="{{ a.title }}">
-  </label>
-  {% endif %}{% endfor %}
-
-  {% for c in certifications %}{% if c.image %}
-  <label for="lb_c{{ loop.index }}" class="lightbox-overlay">
-    <span class="lightbox-close">&times;</span>
-    <img src="{{ c.image }}" alt="{{ c.title }}">
-  </label>
-  {% endif %}{% endfor %}
 
 </div>
 </body>

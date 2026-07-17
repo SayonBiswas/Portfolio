@@ -813,49 +813,22 @@ section { padding: 5.5rem 0; }
   color: var(--violet);
 }
 
-/* ── Lightbox ── */
-.lightbox-toggle { display: none; }
-
-.lightbox-label {
-  cursor: zoom-in;
+/* Achievement / cert thumbnail */
+.achievement-thumb {
   display: block;
+  width: 100%;
+  height: 10rem;
+  object-fit: cover;
+  border-radius: 0.4rem;
+  margin-bottom: 1rem;
+  cursor: zoom-in;
+  transition: opacity 0.2s, transform 0.2s;
 }
 
-.lightbox-overlay {
-  display: none;
-  position: fixed;
-  inset: 0;
-  z-index: 999;
-  background: rgba(0,0,0,0.93);
-  align-items: center;
-  justify-content: center;
+.achievement-thumb:hover {
+  opacity: 0.88;
+  transform: scale(1.01);
 }
-
-.lightbox-toggle:checked ~ .site .lightbox-overlay {
-  display: flex;
-}
-
-.lightbox-overlay img {
-  max-width: 90vw;
-  max-height: 90vh;
-  object-fit: contain;
-  border-radius: var(--radius);
-  box-shadow: 0 0 80px rgba(0,0,0,0.8);
-}
-
-.lightbox-close {
-  position: absolute;
-  top: 1.5rem; right: 1.5rem;
-  color: #fff;
-  font-size: 2rem;
-  cursor: pointer;
-  line-height: 1;
-  opacity: 0.6;
-  transition: opacity 0.2s;
-  font-family: var(--mono);
-}
-
-.lightbox-close:hover { opacity: 1; }
 
 /* ── Contact ── */
 .contact-card {
