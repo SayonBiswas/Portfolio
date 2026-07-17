@@ -7,10 +7,14 @@
 <meta name="description" content="{{ site.description }}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+<!-- Lightbox toggles (one per certificate image) -->
+{% for a in achievements %}{% if a.image %}<input type="checkbox" id="lb_a{{ loop.index }}" class="lightbox-toggle visually-hidden">{% endif %}{% endfor %}
+{% for c in certifications %}{% if c.image %}<input type="checkbox" id="lb_c{{ loop.index }}" class="lightbox-toggle visually-hidden">{% endif %}{% endfor %}
 
 <input type="checkbox" id="theme-toggle" class="visually-hidden" aria-hidden="true">
 <input type="checkbox" id="nav-toggle"   class="visually-hidden" aria-hidden="true">
@@ -20,24 +24,22 @@
   <!-- ── Navbar ── -->
   <nav class="navbar">
     <div class="wrap nav-inner">
-      <div class="nav-logo grad-text">Portfolio</div>
+      <div class="nav-logo">sayon.dev</div>
 
       <div class="nav-links">
         {% for link in nav_links %}
         <a href="#{{ link.id }}">{{ link.name }}</a>
         {% endfor %}
         <label for="theme-toggle" class="icon-btn" tabindex="0" aria-label="Toggle theme" style="margin-left:0.5rem;">
-          {{ icon('sun',  cls='theme-icon-sun',  size=16) | safe }}
-          {{ icon('moon', cls='theme-icon-moon', size=16) | safe }}
+          {{ icon('sun',  cls='theme-icon-sun',  size=15) | safe }}
+          {{ icon('moon', cls='theme-icon-moon', size=15) | safe }}
         </label>
       </div>
 
       <div style="display:flex;align-items:center;gap:0.5rem;">
-        <label for="theme-toggle" class="icon-btn menu-toggle-btn" tabindex="0" aria-label="Toggle theme" style="display:none;">
-        </label>
         <label for="nav-toggle" class="icon-btn menu-toggle-btn" tabindex="0" aria-label="Toggle menu">
-          {{ icon('menu', cls='icon-menu', size=18) | safe }}
-          {{ icon('close', cls='icon-close', size=18) | safe }}
+          {{ icon('menu', cls='icon-menu', size=17) | safe }}
+          {{ icon('close', cls='icon-close', size=17) | safe }}
         </label>
       </div>
     </div>
@@ -54,22 +56,19 @@
     <section class="hero">
       <div class="wrap hero-grid">
         <div>
-          <div class="hero-tag">
-            {{ icon('github', size=13) | safe }}
-            <span>Open to opportunities</span>
-          </div>
+          <div class="hero-tag">available for opportunities</div>
           <h1 class="hero-name">{{ hero.first_name }}<br>
             <span class="grad-text">{{ hero.last_name }}</span>
           </h1>
           <div class="hero-roles">
             <span class="hero-role">{{ hero.role }}</span>
-            <span class="hero-subrole">{{ hero.subrole }}</span>
+            <span class="hero-subrole">// {{ hero.subrole }}</span>
           </div>
           <p class="hero-blurb">{{ hero.blurb }}</p>
           <div class="social-row">
             {% for s in socials %}
             <a href="{{ s.url }}" target="_blank" rel="noopener noreferrer" aria-label="{{ s.name }}">
-              {{ icon(s.name, size=18) | safe }}
+              {{ icon(s.name, size=17) | safe }}
             </a>
             {% endfor %}
           </div>
@@ -81,7 +80,7 @@
               {% if hero.photo %}
               <img src="{{ hero.photo }}" alt="{{ hero.first_name }} {{ hero.last_name }}">
               {% else %}
-              <div class="hero-photo-placeholder">Add your photo in content.py</div>
+              <div class="hero-photo-placeholder">// add photo in content.py</div>
               {% endif %}
             </div>
           </div>
@@ -92,14 +91,12 @@
     <!-- ── About ── -->
     <section id="about">
       <div class="wrap">
-        <span class="eyebrow">Who I am</span>
+        <span class="eyebrow">who_i_am</span>
         <h2 class="section-heading">About <span class="grad-text">Me</span></h2>
         <div class="section-bar"></div>
         <div class="grid-2">
           <div class="about-text">
-            {% for p in about.paragraphs %}
-            <p>{{ p }}</p>
-            {% endfor %}
+            {% for p in about.paragraphs %}<p>{{ p }}</p>{% endfor %}
           </div>
           <div style="display:flex;flex-direction:column;gap:1rem;">
             {% for card in about.cards %}
@@ -116,7 +113,7 @@
     <!-- ── Education ── -->
     <section id="education">
       <div class="wrap">
-        <span class="eyebrow">Academic background</span>
+        <span class="eyebrow">academic_background</span>
         <h2 class="section-heading">My <span class="grad-text">Education</span></h2>
         <div class="section-bar"></div>
         {% for e in education %}
@@ -137,7 +134,7 @@
     <!-- ── Experience ── -->
     <section id="experience">
       <div class="wrap">
-        <span class="eyebrow">Work history</span>
+        <span class="eyebrow">work_history</span>
         <h2 class="section-heading">My <span class="grad-text">Experience</span></h2>
         <div class="section-bar"></div>
         {% for job in experience %}
@@ -150,21 +147,17 @@
             <span class="badge-pill">{{ job.period }}</span>
           </div>
           <ul class="exp-list">
-            {% for b in job.bullets %}
-            <li>{{ b }}</li>
-            {% endfor %}
+            {% for b in job.bullets %}<li>{{ b }}</li>{% endfor %}
           </ul>
           {% if job.tech %}
           <div class="tech-row" style="margin-top:1rem;">
-            {% for t in job.tech %}
-            <span class="tech-pill">{{ t }}</span>
-            {% endfor %}
+            {% for t in job.tech %}<span class="tech-pill">{{ t }}</span>{% endfor %}
           </div>
           {% endif %}
           {% if job.github %}
           <div style="margin-top:1rem;">
             <a class="project-link project-link-ghost" href="{{ job.github }}" target="_blank" rel="noopener noreferrer">
-              {{ icon('github', size=14) | safe }} View on GitHub
+              {{ icon('github', size=13) | safe }} View on GitHub
             </a>
           </div>
           {% endif %}
@@ -176,41 +169,33 @@
     <!-- ── Projects ── -->
     <section id="projects">
       <div class="wrap">
-        <span class="eyebrow">Things I've built</span>
+        <span class="eyebrow">things_i_built</span>
         <h2 class="section-heading">My <span class="grad-text">Projects</span></h2>
         <div class="section-bar"></div>
 
-        <!-- Completed -->
-        <h3 style="font-size:1.1rem;font-weight:700;margin-bottom:1.25rem;color:var(--cyan);">
-          ✅ Completed
-        </h3>
+        <p style="font-family:var(--mono);font-size:0.82rem;color:var(--green);margin-bottom:1.25rem;">✓ completed</p>
         <div class="grid-3" style="margin-bottom:3rem;">
           {% for p in projects_completed %}
           <div class="project-card">
             <div class="project-image">
-              {% if p.image %}
-              <img src="{{ p.image }}" alt="{{ p.title }}">
-              {% else %}
-              <div class="project-image-placeholder">{{ p.title }}</div>
-              {% endif %}
+              {% if p.image %}<img src="{{ p.image }}" alt="{{ p.title }}">
+              {% else %}<div class="project-image-placeholder">// {{ p.title }}</div>{% endif %}
             </div>
             <div class="project-body">
               <h3>{{ p.title }}</h3>
               <p>{{ p.description }}</p>
               <div class="tech-row">
-                {% for t in p.tech %}
-                <span class="tech-pill">{{ t }}</span>
-                {% endfor %}
+                {% for t in p.tech %}<span class="tech-pill">{{ t }}</span>{% endfor %}
               </div>
               <div class="project-btns">
                 {% if p.github %}
                 <a class="project-link project-link-ghost" href="{{ p.github }}" target="_blank" rel="noopener noreferrer">
-                  {{ icon('github', size=14) | safe }} GitHub
+                  {{ icon('github', size=13) | safe }} GitHub
                 </a>
                 {% endif %}
                 {% if p.live %}
                 <a class="project-link" href="{{ p.live }}" target="_blank" rel="noopener noreferrer">
-                  {{ icon('external', size=14) | safe }} Live Demo
+                  {{ icon('external', size=13) | safe }} Live
                 </a>
                 {% endif %}
               </div>
@@ -219,40 +204,32 @@
           {% endfor %}
         </div>
 
-        <!-- Ongoing -->
-        <h3 style="font-size:1.1rem;font-weight:700;margin-bottom:1.25rem;color:var(--violet);">
-          🚧 Ongoing
-        </h3>
+        <p style="font-family:var(--mono);font-size:0.82rem;color:var(--cyan);margin-bottom:1.25rem;">~ ongoing</p>
         <div class="grid-3">
           {% for p in projects_ongoing %}
-          <div class="project-card" style="border-color:rgba(139,92,246,0.25);">
-            <div class="project-image" style="background:linear-gradient(135deg,rgba(139,92,246,0.1),rgba(236,72,153,0.1));">
-              {% if p.image %}
-              <img src="{{ p.image }}" alt="{{ p.title }}">
-              {% else %}
-              <div class="project-image-placeholder">{{ p.title }}</div>
-              {% endif %}
+          <div class="project-card" style="border-color:rgba(88,166,255,0.2);">
+            <div class="project-image" style="background:linear-gradient(135deg,rgba(88,166,255,0.07),rgba(188,140,255,0.07));">
+              {% if p.image %}<img src="{{ p.image }}" alt="{{ p.title }}">
+              {% else %}<div class="project-image-placeholder">// {{ p.title }}</div>{% endif %}
             </div>
             <div class="project-body">
-              <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.25rem;">
+              <div style="display:flex;align-items:center;gap:0.5rem;flex-wrap:wrap;">
                 <h3 style="margin:0;">{{ p.title }}</h3>
-                <span style="font-size:0.7rem;font-weight:600;padding:0.2rem 0.6rem;border-radius:999px;background:rgba(139,92,246,0.15);color:#a78bfa;border:1px solid rgba(139,92,246,0.3);white-space:nowrap;">In Progress</span>
+                <span style="font-family:var(--mono);font-size:0.67rem;font-weight:600;padding:0.15rem 0.5rem;border-radius:999px;background:rgba(88,166,255,0.1);color:var(--cyan);border:1px solid rgba(88,166,255,0.2);white-space:nowrap;">in-progress</span>
               </div>
               <p>{{ p.description }}</p>
               <div class="tech-row">
-                {% for t in p.tech %}
-                <span class="tech-pill">{{ t }}</span>
-                {% endfor %}
+                {% for t in p.tech %}<span class="tech-pill">{{ t }}</span>{% endfor %}
               </div>
               <div class="project-btns">
                 {% if p.github %}
                 <a class="project-link project-link-ghost" href="{{ p.github }}" target="_blank" rel="noopener noreferrer">
-                  {{ icon('github', size=14) | safe }} GitHub
+                  {{ icon('github', size=13) | safe }} GitHub
                 </a>
                 {% endif %}
                 {% if p.live %}
                 <a class="project-link" href="{{ p.live }}" target="_blank" rel="noopener noreferrer">
-                  {{ icon('external', size=14) | safe }} Live Demo
+                  {{ icon('external', size=13) | safe }} Live
                 </a>
                 {% endif %}
               </div>
@@ -267,17 +244,15 @@
     <!-- ── Skills ── -->
     <section id="skills">
       <div class="wrap">
-        <span class="eyebrow">What I work with</span>
+        <span class="eyebrow">tech_stack</span>
         <h2 class="section-heading">My <span class="grad-text">Skills</span></h2>
         <div class="section-bar"></div>
         <div class="grid-3">
           {% for cat in skills %}
           <div class="glass-card skill-card">
-            <h3 class="grad-text">{{ cat.category }}</h3>
+            <h3>{{ cat.category }}</h3>
             <div class="skill-pills">
-              {% for s in cat.skills %}
-              <span class="skill-pill">{{ s }}</span>
-              {% endfor %}
+              {% for s in cat.skills %}<span class="skill-pill">{{ s }}</span>{% endfor %}
             </div>
           </div>
           {% endfor %}
@@ -285,42 +260,50 @@
       </div>
     </section>
 
-    <!-- ── Achievements ── -->
+    <!-- ── Achievements & Certifications ── -->
     <section id="achievements">
       <div class="wrap">
-        <span class="eyebrow">Recognition</span>
+        <span class="eyebrow">recognition</span>
         <h2 class="section-heading">Certifications &amp; <span class="grad-text">Achievements</span></h2>
         <div class="section-bar"></div>
 
-        <h3 style="font-size:1.1rem;font-weight:700;margin-bottom:1rem;color:var(--cyan);">🏆 Achievements</h3>
+        <p style="font-family:var(--mono);font-size:0.82rem;color:var(--green);margin-bottom:1.25rem;">✓ achievements</p>
         <div class="grid-2" style="margin-bottom:2.5rem;">
           {% for a in achievements %}
-          <div class="glass-card achieve-card">
+          <div class="glass-card achieve-card" style="flex-direction:column;">
             {% if a.image %}
-            <img src="{{ a.image }}" alt="{{ a.title }}"
-              style="width:100%;height:10rem;object-fit:cover;border-radius:0.5rem;margin-bottom:1rem;">
+            <label for="lb_a{{ loop.index }}" class="lightbox-label">
+              <img src="{{ a.image }}" alt="{{ a.title }}"
+                style="width:100%;height:10rem;object-fit:cover;border-radius:0.4rem;margin-bottom:1rem;">
+            </label>
             {% endif %}
-            <div class="achieve-icon">{{ icon(a.icon, size=22) | safe }}</div>
+            <div style="display:flex;gap:1rem;align-items:flex-start;">
+              <div class="achieve-icon">{{ icon(a.icon, size=20) | safe }}</div>
               <div>
                 <h3>{{ a.title }}</h3>
                 <p>{{ a.text }}</p>
               </div>
             </div>
+          </div>
           {% endfor %}
         </div>
 
-        <h3 style="font-size:1.1rem;font-weight:700;margin-bottom:1rem;color:var(--violet);">📜 Certifications</h3>
+        <p style="font-family:var(--mono);font-size:0.82rem;color:var(--cyan);margin-bottom:1.25rem;">~ certifications</p>
         <div class="grid-2">
           {% for c in certifications %}
-          <div class="glass-card achieve-card">
+          <div class="glass-card achieve-card" style="flex-direction:column;">
             {% if c.image %}
-            <img src="{{ c.image }}" alt="{{ c.title }}"
-              style="width:100%;height:10rem;object-fit:cover;border-radius:0.5rem;margin-bottom:1rem;">
+            <label for="lb_c{{ loop.index }}" class="lightbox-label">
+              <img src="{{ c.image }}" alt="{{ c.title }}"
+                style="width:100%;height:10rem;object-fit:cover;border-radius:0.4rem;margin-bottom:1rem;">
+            </label>
             {% endif %}
-            <div class="achieve-icon">{{ icon(c.icon, size=22) | safe }}</div>
-            <div>
-              <h3>{{ c.title }}</h3>
-              <p>{{ c.text }}</p>
+            <div style="display:flex;gap:1rem;align-items:flex-start;">
+              <div class="achieve-icon cert-icon">{{ icon(c.icon, size=20) | safe }}</div>
+              <div>
+                <h3>{{ c.title }}</h3>
+                <p>{{ c.text }}</p>
+              </div>
             </div>
           </div>
           {% endfor %}
@@ -329,21 +312,21 @@
       </div>
     </section>
 
-    <!-- ── Clubs (only shown if non-empty) ── -->
+    <!-- ── Clubs (only if non-empty) ── -->
     {% if clubs %}
     <section id="clubs">
       <div class="wrap">
-        <span class="eyebrow">Community</span>
-        <h2 class="section-heading">Clubs &amp; <span class="grad-text">Communities</span></h2>
+        <span class="eyebrow">community</span>
+        <h2 class="section-heading">Clubs &amp; <span class="grad-text2">Communities</span></h2>
         <div class="section-bar"></div>
         <div class="grid-2">
           {% for c in clubs %}
           <div class="glass-card achieve-card">
-            <div class="achieve-icon club-icon">{{ icon('users', size=22) | safe }}</div>
+            <div class="achieve-icon club-icon">{{ icon('users', size=20) | safe }}</div>
             <div>
               <h3>{{ c.title }}</h3>
-              <p class="club-role">{{ c.role }}</p>
-              <p class="club-detail">{{ c.text }}</p>
+              <p style="font-size:0.78rem;color:var(--fg3);margin-bottom:0.3rem;font-family:var(--mono);">{{ c.role }}</p>
+              <p>{{ c.text }}</p>
             </div>
           </div>
           {% endfor %}
@@ -355,24 +338,22 @@
     <!-- ── Contact ── -->
     <section id="contact">
       <div class="wrap">
-        <span class="eyebrow">Let's talk</span>
-        <h2 class="section-heading">Get In <span class="grad-text">Touch</span></h2>
+        <span class="eyebrow">get_in_touch</span>
+        <h2 class="section-heading">Contact <span class="grad-text">Me</span></h2>
         <div class="section-bar"></div>
         <div class="grid-2">
           <div class="glass-card contact-card">
-            <div class="contact-icon-wrap">{{ icon('mail', size=22) | safe }}</div>
-            <span class="contact-label">Email</span>
+            <div class="contact-icon-wrap">{{ icon('mail', size=20) | safe }}</div>
+            <span class="contact-label">email</span>
             <a class="contact-value" href="mailto:{{ contact.email }}">{{ contact.email }}</a>
           </div>
-          <div class="glass-card contact-card violet">
-            <div class="contact-icon-wrap">{{ icon('phone', size=22) | safe }}</div>
-            <span class="contact-label">Phone</span>
+          <div class="glass-card contact-card blue">
+            <div class="contact-icon-wrap">{{ icon('phone', size=20) | safe }}</div>
+            <span class="contact-label">phone</span>
             <a class="contact-value" href="{{ contact.phone_href }}">{{ contact.phone }}</a>
           </div>
         </div>
-        <p class="contact-note">
-          Feel free to reach out — I'm always excited to connect and discuss new opportunities!
-        </p>
+        <p class="contact-note">{{ contact.note if contact.note else "Feel free to reach out — I'm always excited to connect and discuss new opportunities!" }}</p>
       </div>
     </section>
 
@@ -387,30 +368,43 @@
           <p>{{ footer.tagline }}</p>
         </div>
         <div class="footer-col">
-          <h4>Quick Links</h4>
+          <h4>nav</h4>
           <ul class="footer-links">
-            <li><a href="#about">About</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#skills">Skills</a></li>
-            <li><a href="#contact">Contact</a></li>
+            <li><a href="#about">about</a></li>
+            <li><a href="#projects">projects</a></li>
+            <li><a href="#skills">skills</a></li>
+            <li><a href="#contact">contact</a></li>
           </ul>
         </div>
         <div class="footer-col">
-          <h4>Connect</h4>
+          <h4>connect</h4>
           <div class="footer-socials">
             {% for s in socials %}
             <a href="{{ s.url }}" target="_blank" rel="noopener noreferrer" aria-label="{{ s.name }}">
-              {{ icon(s.name, size=16) | safe }}
+              {{ icon(s.name, size=15) | safe }}
             </a>
             {% endfor %}
           </div>
         </div>
       </div>
-      <div class="footer-bottom">
-        <p>{{ footer.copyright }}</p>
-      </div>
+      <div class="footer-bottom">{{ footer.copyright }}</div>
     </div>
   </footer>
+
+  <!-- ── Lightbox overlays ── -->
+  {% for a in achievements %}{% if a.image %}
+  <label for="lb_a{{ loop.index }}" class="lightbox-overlay">
+    <span class="lightbox-close">&times;</span>
+    <img src="{{ a.image }}" alt="{{ a.title }}">
+  </label>
+  {% endif %}{% endfor %}
+
+  {% for c in certifications %}{% if c.image %}
+  <label for="lb_c{{ loop.index }}" class="lightbox-overlay">
+    <span class="lightbox-close">&times;</span>
+    <img src="{{ c.image }}" alt="{{ c.title }}">
+  </label>
+  {% endif %}{% endfor %}
 
 </div>
 </body>
