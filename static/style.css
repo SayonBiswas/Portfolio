@@ -46,8 +46,8 @@
   --card:        #faf7f2;
   --card2:       #f0ebe2;
   --fg:          #1c2128;
-  --fg2:         #424a53;
-  --fg3:         #6e7681;
+  --fg2:         #374151;
+  --fg3:         #4b5563;
   --border:      #d0c9be;
   --border2:     #bfb8ac;
   --green:       #1a7f37;
@@ -63,6 +63,72 @@
   --glow-c:      rgba(9,105,218,0.1);
 }
 
+/* ── Light mode: fix transparent/see-through elements ── */
+#theme-toggle:checked ~ .site .glass-card {
+  background: var(--card);
+}
+
+#theme-toggle:checked ~ .site .glass-card::before {
+  background: linear-gradient(135deg, rgba(26,127,55,0.03), rgba(9,105,218,0.03));
+}
+
+#theme-toggle:checked ~ .site .project-card {
+  background: var(--card);
+}
+
+#theme-toggle:checked ~ .site .project-image {
+  background: linear-gradient(135deg, rgba(26,127,55,0.06), rgba(9,105,218,0.06));
+}
+
+#theme-toggle:checked ~ .site .skill-pill {
+  background: var(--bg3);
+}
+
+#theme-toggle:checked ~ .site .hero-photo-inner {
+  background: var(--bg2);
+}
+
+#theme-toggle:checked ~ .site .social-row a,
+#theme-toggle:checked ~ .site .footer-socials a {
+  background: var(--card);
+}
+
+#theme-toggle:checked ~ .site .navbar {
+  background: rgba(246,240,232,0.95);
+}
+
+/* ── Light mode: darker secondary text ── */
+#theme-toggle:checked ~ .site .hero-blurb,
+#theme-toggle:checked ~ .site .hero-subrole,
+#theme-toggle:checked ~ .site .about-text p,
+#theme-toggle:checked ~ .site .about-card p,
+#theme-toggle:checked ~ .site .timeline-card .school,
+#theme-toggle:checked ~ .site .timeline-card p.desc,
+#theme-toggle:checked ~ .site .exp-list li,
+#theme-toggle:checked ~ .site .project-body p,
+#theme-toggle:checked ~ .site .achieve-card p,
+#theme-toggle:checked ~ .site .contact-note,
+#theme-toggle:checked ~ .site .footer-brand p,
+#theme-toggle:checked ~ .site .footer-links a,
+#theme-toggle:checked ~ .site .nav-links a,
+#theme-toggle:checked ~ .site .mobile-menu a {
+  color: #374151;
+}
+
+#theme-toggle:checked ~ .site .footer-bottom,
+#theme-toggle:checked ~ .site .contact-label,
+#theme-toggle:checked ~ .site .badge-cyan,
+#theme-toggle:checked ~ .site .eyebrow {
+  color: #4b5563;
+}
+
+#theme-toggle:checked ~ .site .exp-card {
+  background: linear-gradient(135deg,
+    rgba(26,127,55,0.04) 0%,
+    rgba(9,105,218,0.04) 100%
+  ) !important;
+}
+
 html { scroll-behavior: smooth; }
 
 body {
@@ -75,9 +141,9 @@ body {
   overflow-x: hidden;
 }
 
-/* Background grid pattern — subtle backend/terminal feel */
 .site {
   min-height: 100vh;
+  background-color: var(--bg);
   background-image:
     radial-gradient(ellipse 70% 40% at 10% 0%, rgba(63,185,80,0.05) 0%, transparent 60%),
     radial-gradient(ellipse 50% 35% at 90% 5%,  rgba(88,166,255,0.06) 0%, transparent 55%),
@@ -88,6 +154,7 @@ body {
 }
 
 #theme-toggle:checked ~ .site {
+  background-color: var(--bg);
   background-image:
     radial-gradient(ellipse 70% 40% at 10% 0%, rgba(26,127,55,0.04) 0%, transparent 60%),
     radial-gradient(ellipse 50% 35% at 90% 5%,  rgba(9,105,218,0.05) 0%, transparent 55%),
@@ -106,7 +173,6 @@ h1,h2,h3,h4 { margin: 0; line-height: 1.25; }
 
 .wrap { max-width: 72rem; margin: 0 auto; padding: 0 1.5rem; }
 
-/* ── Utility: gradient text ── */
 .grad-text {
   background: var(--grad);
   -webkit-background-clip: text;
@@ -121,7 +187,6 @@ h1,h2,h3,h4 { margin: 0; line-height: 1.25; }
   color: transparent;
 }
 
-/* ── Eyebrow / section labels ── */
 .eyebrow {
   display: inline-flex;
   align-items: center;
@@ -134,10 +199,7 @@ h1,h2,h3,h4 { margin: 0; line-height: 1.25; }
   margin-bottom: 0.6rem;
 }
 
-.eyebrow::before {
-  content: '//';
-  opacity: 0.5;
-}
+.eyebrow::before { content: '//'; opacity: 0.5; }
 
 .section-bar {
   width: 2.5rem;
@@ -158,7 +220,7 @@ h1,h2,h3,h4 { margin: 0; line-height: 1.25; }
 }
 
 #theme-toggle:checked ~ .site .navbar {
-  background: rgba(246,240,232,0.9);
+  background: rgba(246,240,232,0.95);
 }
 
 .nav-inner {
@@ -168,7 +230,6 @@ h1,h2,h3,h4 { margin: 0; line-height: 1.25; }
   height: 3.75rem;
 }
 
-/* Terminal-style logo */
 .nav-logo {
   font-family: var(--mono);
   font-size: 1rem;
@@ -307,7 +368,6 @@ h1,h2,h3,h4 { margin: 0; line-height: 1.25; }
   .hero-grid { grid-template-columns: 1.1fr 0.9fr; }
 }
 
-/* Terminal prompt tag */
 .hero-tag {
   display: inline-flex;
   align-items: center;
@@ -386,7 +446,6 @@ h1,h2,h3,h4 { margin: 0; line-height: 1.25; }
   box-shadow: 0 6px 20px rgba(63,185,80,0.15);
 }
 
-/* Hero photo */
 .hero-photo-wrap { position: relative; }
 
 .hero-photo-outer {
@@ -407,7 +466,6 @@ h1,h2,h3,h4 { margin: 0; line-height: 1.25; }
   z-index: -1;
 }
 
-/* Terminal window chrome on photo */
 .hero-photo-outer::after {
   content: '● ● ●';
   position: absolute;
@@ -574,6 +632,13 @@ section { padding: 5.5rem 0; }
   border-color: rgba(63,185,80,0.15) !important;
 }
 
+#theme-toggle:checked ~ .site .exp-card {
+  background: linear-gradient(135deg,
+    rgba(26,127,55,0.04) 0%,
+    rgba(9,105,218,0.04) 100%
+  ) !important;
+}
+
 .exp-card:hover {
   border-color: rgba(63,185,80,0.35) !important;
   box-shadow: 0 0 0 1px rgba(63,185,80,0.08), 0 12px 40px -10px rgba(63,185,80,0.15) !important;
@@ -615,7 +680,6 @@ section { padding: 5.5rem 0; }
   transition: all 0.3s;
 }
 
-/* top accent line */
 .project-card::before {
   content: '';
   display: block;
@@ -799,21 +863,18 @@ section { padding: 5.5rem 0; }
   line-height: 1.6;
 }
 
-/* Cert icon variant */
 .cert-icon {
   background: rgba(88,166,255,0.08);
   border-color: rgba(88,166,255,0.15);
   color: var(--cyan);
 }
 
-/* Club icon */
 .club-icon {
   background: rgba(188,140,255,0.08);
   border-color: rgba(188,140,255,0.15);
   color: var(--violet);
 }
 
-/* Achievement / cert thumbnail */
 .achievement-thumb {
   display: block;
   width: 100%;
@@ -972,17 +1033,6 @@ section { padding: 5.5rem 0; }
   font-size: 0.78rem;
   color: var(--fg3);
   font-family: var(--mono);
-}
-
-/* ── Light mode: stroke on plain white headings ── */
-#theme-toggle:checked ~ .site .hero-name:not(.grad-text),
-#theme-toggle:checked ~ .site .section-heading {
-  -webkit-text-stroke: 1.5px #1c2128;
-}
-
-#theme-toggle:checked ~ .site .section-heading .grad-text,
-#theme-toggle:checked ~ .site .hero-name .grad-text {
-  -webkit-text-stroke: 0;
 }
 
 /* ── Focus ── */

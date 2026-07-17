@@ -106,7 +106,7 @@ PROJECTS_COMPLETED = [
         "description": "A comprehensive backend web application featuring a functional dashboard, secure user authentication, and a dynamic examination system with a relational database.",
         "tech": ["JSP", "PostgreSQL", "SQL"],
         "github": "https://github.com/SayonBiswas/IWT",
-        "live": "",
+        "live": "https://examhub-q9ez.onrender.com",
         "image": "examhub.png",
     },
     {
@@ -114,7 +114,7 @@ PROJECTS_COMPLETED = [
         "description": "A full-featured student management web application for managing student records with a clean interface and robust backend functionality.",
         "tech": ["HTML", "CSS", "JavaScript"],
         "github": "https://github.com/SayonBiswas/Student_Management_Website",
-        "live": "",
+        "live": "https://student-management-website-iirr.onrender.com",
         "image": "student_management.png",
     },
     {
