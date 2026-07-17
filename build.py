@@ -39,18 +39,20 @@ env.globals["icon"] = icon
 template = env.get_template("index.html.j2")
 
 html = template.render(
-    site        = c.SITE,
-    nav_links   = c.NAV_LINKS,
-    socials     = c.SOCIALS,
-    hero        = c.HERO,
-    about       = c.ABOUT,
-    education   = c.EDUCATION,
-    experience  = c.EXPERIENCE,
-    projects    = c.PROJECTS,
-    skills      = c.SKILLS,
-    achievements= c.ACHIEVEMENTS,
-    contact     = c.CONTACT,
-    footer      = c.FOOTER,
+    site                = c.SITE,
+    nav_links           = c.NAV_LINKS,
+    socials             = c.SOCIALS,
+    hero                = c.HERO,
+    about               = c.ABOUT,
+    education           = c.EDUCATION,
+    experience          = c.EXPERIENCE,
+    projects_completed  = c.PROJECTS_COMPLETED,
+    projects_ongoing    = c.PROJECTS_ONGOING,
+    skills              = c.SKILLS,
+    achievements        = c.ACHIEVEMENTS,
+    certifications      = c.CERTIFICATIONS,
+    contact             = c.CONTACT,
+    footer              = c.FOOTER,
 )
 
 # ── Write output ───────────────────────────────────────────────────────

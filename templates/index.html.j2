@@ -154,6 +154,20 @@
             <li>{{ b }}</li>
             {% endfor %}
           </ul>
+          {% if job.tech %}
+          <div class="tech-row" style="margin-top:1rem;">
+            {% for t in job.tech %}
+            <span class="tech-pill">{{ t }}</span>
+            {% endfor %}
+          </div>
+          {% endif %}
+          {% if job.github %}
+          <div style="margin-top:1rem;">
+            <a class="project-link project-link-ghost" href="{{ job.github }}" target="_blank" rel="noopener noreferrer">
+              {{ icon('github', size=14) | safe }} View on GitHub
+            </a>
+          </div>
+          {% endif %}
         </div>
         {% endfor %}
       </div>
@@ -165,8 +179,13 @@
         <span class="eyebrow">Things I've built</span>
         <h2 class="section-heading">My <span class="grad-text">Projects</span></h2>
         <div class="section-bar"></div>
-        <div class="grid-3">
-          {% for p in projects %}
+
+        <!-- Completed -->
+        <h3 style="font-size:1.1rem;font-weight:700;margin-bottom:1.25rem;color:var(--cyan);">
+          ✅ Completed
+        </h3>
+        <div class="grid-3" style="margin-bottom:3rem;">
+          {% for p in projects_completed %}
           <div class="project-card">
             <div class="project-image">
               {% if p.image %}
@@ -199,6 +218,49 @@
           </div>
           {% endfor %}
         </div>
+
+        <!-- Ongoing -->
+        <h3 style="font-size:1.1rem;font-weight:700;margin-bottom:1.25rem;color:var(--violet);">
+          🚧 Ongoing
+        </h3>
+        <div class="grid-3">
+          {% for p in projects_ongoing %}
+          <div class="project-card" style="border-color:rgba(139,92,246,0.25);">
+            <div class="project-image" style="background:linear-gradient(135deg,rgba(139,92,246,0.1),rgba(236,72,153,0.1));">
+              {% if p.image %}
+              <img src="{{ p.image }}" alt="{{ p.title }}">
+              {% else %}
+              <div class="project-image-placeholder">{{ p.title }}</div>
+              {% endif %}
+            </div>
+            <div class="project-body">
+              <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.25rem;">
+                <h3 style="margin:0;">{{ p.title }}</h3>
+                <span style="font-size:0.7rem;font-weight:600;padding:0.2rem 0.6rem;border-radius:999px;background:rgba(139,92,246,0.15);color:#a78bfa;border:1px solid rgba(139,92,246,0.3);white-space:nowrap;">In Progress</span>
+              </div>
+              <p>{{ p.description }}</p>
+              <div class="tech-row">
+                {% for t in p.tech %}
+                <span class="tech-pill">{{ t }}</span>
+                {% endfor %}
+              </div>
+              <div class="project-btns">
+                {% if p.github %}
+                <a class="project-link project-link-ghost" href="{{ p.github }}" target="_blank" rel="noopener noreferrer">
+                  {{ icon('github', size=14) | safe }} GitHub
+                </a>
+                {% endif %}
+                {% if p.live %}
+                <a class="project-link" href="{{ p.live }}" target="_blank" rel="noopener noreferrer">
+                  {{ icon('external', size=14) | safe }} Live Demo
+                </a>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+
       </div>
     </section>
 
@@ -229,17 +291,41 @@
         <span class="eyebrow">Recognition</span>
         <h2 class="section-heading">Certifications &amp; <span class="grad-text">Achievements</span></h2>
         <div class="section-bar"></div>
-        <div class="grid-2">
+
+        <h3 style="font-size:1.1rem;font-weight:700;margin-bottom:1rem;color:var(--cyan);">🏆 Achievements</h3>
+        <div class="grid-2" style="margin-bottom:2.5rem;">
           {% for a in achievements %}
           <div class="glass-card achieve-card">
+            {% if a.image %}
+            <img src="{{ a.image }}" alt="{{ a.title }}"
+              style="width:100%;height:10rem;object-fit:cover;border-radius:0.5rem;margin-bottom:1rem;">
+            {% endif %}
             <div class="achieve-icon">{{ icon(a.icon, size=22) | safe }}</div>
+              <div>
+                <h3>{{ a.title }}</h3>
+                <p>{{ a.text }}</p>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+
+        <h3 style="font-size:1.1rem;font-weight:700;margin-bottom:1rem;color:var(--violet);">📜 Certifications</h3>
+        <div class="grid-2">
+          {% for c in certifications %}
+          <div class="glass-card achieve-card">
+            {% if c.image %}
+            <img src="{{ c.image }}" alt="{{ c.title }}"
+              style="width:100%;height:10rem;object-fit:cover;border-radius:0.5rem;margin-bottom:1rem;">
+            {% endif %}
+            <div class="achieve-icon">{{ icon(c.icon, size=22) | safe }}</div>
             <div>
-              <h3>{{ a.title }}</h3>
-              <p>{{ a.text }}</p>
+              <h3>{{ c.title }}</h3>
+              <p>{{ c.text }}</p>
             </div>
           </div>
           {% endfor %}
         </div>
+
       </div>
     </section>
 
