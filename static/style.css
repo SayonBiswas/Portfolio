@@ -1048,3 +1048,83 @@ a:focus-visible, label:focus-visible {
     animation: none !important;
   }
 }
+
+/* ── Light mode: force dark color on all plain headings ── */
+#theme-toggle:checked ~ .site .hero-name,
+#theme-toggle:checked ~ .site .hero-role,
+#theme-toggle:checked ~ .site .section-heading,
+#theme-toggle:checked ~ .site .timeline-card h3,
+#theme-toggle:checked ~ .site .project-body h3,
+#theme-toggle:checked ~ .site .achieve-card h3,
+#theme-toggle:checked ~ .site .skill-card h3,
+#theme-toggle:checked ~ .site .about-card h3,
+#theme-toggle:checked ~ .site .footer-brand h3 {
+  color: #1c2128;
+  -webkit-text-stroke: 0;
+}
+
+/* keep gradient parts as gradient, not dark */
+#theme-toggle:checked ~ .site .hero-name .grad-text,
+#theme-toggle:checked ~ .site .section-heading .grad-text,
+#theme-toggle:checked ~ .site .section-heading .grad-text2,
+#theme-toggle:checked ~ .site .footer-brand h3.grad-text {
+  color: transparent;
+  -webkit-text-stroke: 0;
+}
+
+/* body text */
+#theme-toggle:checked ~ .site {
+  color: #1c2128;
+}
+
+/* nav logo */
+#theme-toggle:checked ~ .site .nav-logo {
+  color: var(--green);
+}
+
+/* hero subrole */
+#theme-toggle:checked ~ .site .hero-subrole {
+  color: var(--fg2);
+}
+
+/* ── Mobile theme toggle ── */
+.mobile-theme-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1rem;
+  border-radius: var(--radius);
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--green);
+  font-family: var(--mono);
+  cursor: pointer;
+  border-top: 1px solid var(--border);
+  margin-top: 0.4rem;
+  padding-top: 1rem;
+  transition: background 0.2s;
+}
+
+.mobile-theme-toggle:hover {
+  background: rgba(63, 185, 80, 0.08);
+}
+
+.mobile-theme-toggle .theme-icon-sun {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.mobile-theme-toggle .theme-icon-moon {
+  display: none;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+#theme-toggle:checked ~ .site .mobile-theme-toggle .theme-icon-sun {
+  display: none;
+}
+
+#theme-toggle:checked ~ .site .mobile-theme-toggle .theme-icon-moon {
+  display: flex;
+}

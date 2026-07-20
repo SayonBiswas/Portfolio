@@ -192,5 +192,5 @@ CONTACT = {
 FOOTER = {
     "name": "Sayon Biswas",
     "tagline": "Python Developer & Aspiring Data Scientist",
-    "copyright": "\u00a9 2025 Sayon Biswas. All rights reserved. Built with Python.",
+    "copyright": "\u00a9 2026 Sayon Biswas. All rights reserved. Built with Python.",
 }
