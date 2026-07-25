@@ -114,7 +114,7 @@ PROJECTS_COMPLETED = [
         "description": "A full-featured student management web application for managing student records with a clean interface and robust backend functionality.",
         "tech": ["HTML", "CSS", "JavaScript"],
         "github": "https://github.com/SayonBiswas/Student_Management_Website",
-        "live": "https://student-management-website-iirr.onrender.com",
+        "live": "http://studentmanagement-env.eba-uup6bgvc.ap-south-2.elasticbeanstalk.com",
         "image": "student_management.png",
     },
     {
