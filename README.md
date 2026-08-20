@@ -1,7 +1,8 @@
 # 🧑‍💻 sayon.dev — Personal Portfolio
 
-> A backend-developer-themed personal portfolio site built with **Python + Jinja2**.  
-> Dark by default, light mode toggle, zero JavaScript — pure CSS checkbox hack.
+> A modern editorial portfolio site built with **Python + Jinja2**.  
+> Dark by default, light mode toggle, zero JavaScript — pure CSS checkbox hack.  
+> Featuring a distinctive bento design system with case study pages.
 
 ---
 
@@ -10,9 +11,11 @@
 - 🌑 **Dark / Light mode** — theme toggle works on all devices (desktop navbar + mobile hamburger menu), powered entirely by CSS (no JS)
 - ⚡ **Static site generator** — one `python build.py` command renders everything to a single `output/` folder
 - 🧩 **Content-driven** — all text, links, and data live in `content.py`; no HTML editing needed
-- 🖼️ **Lightbox image viewer** — achievements and certifications support image previews via CSS checkbox lightbox
+- 📄 **Project case study pages** — individual detailed pages for each project with GitHub links, live demos, and features
+- 📥 **Resume download** — PDF resume download buttons in hero section and footer
+- 🎨 **Editorial bento design** — distinctive two-column layout pattern, cyan/orange/lime accents, Syne + Playfair Display typography
 - 📱 **Fully responsive** — mobile-first layout, hamburger nav on small screens
-- 🎨 **Terminal aesthetic** — JetBrains Mono, green accent, grid background, glowing cards
+- 🖼️ **Inline SVG icons** — custom icon system via `icons.py` for sharp, scalable graphics
 
 ---
 
@@ -20,13 +23,14 @@
 
 ```
 Portfolio/
-├── build.py           # Build script — renders template + copies static assets
+├── build.py           # Build script — renders templates + copies static assets
 ├── content.py         # All your personal data (name, projects, skills, etc.)
 ├── icons.py           # SVG icon helper used inside Jinja2 templates
 ├── requirements.txt   # Python dependencies (Jinja2)
 ├── render.yaml        # Render.com deployment config
 ├── templates/
-│   └── index.html.j2  # Jinja2 HTML template
+│   ├── index.html.j2  # Main portfolio Jinja2 template
+│   └── project.html.j2 # Project case study template
 └── static/
     └── style.css      # All styles (dark/light tokens, layout, components)
 ```
@@ -52,15 +56,23 @@ pip install -r requirements.txt
 
 Open `content.py` and fill in your own details — name, bio, projects, skills, socials, contact, etc.
 
-### 4. Build the site
+### 4. Add your resume
+
+Place your PDF resume file in the project root directory (e.g., `Your_Name_Resume.pdf`) and update the `resume` field in `content.py` under the `CONTACT` dictionary.
+
+### 5. Build the site
 
 ```bash
 python build.py
 ```
 
-This generates an `output/` folder containing `index.html` and `style.css`.
+This generates an `output/` folder containing:
+- `index.html` — Main portfolio page
+- `project_*.html` — Individual project case study pages
+- `style.css` — Stylesheet
+- Your resume file (if present)
 
-### 5. Preview locally
+### 6. Preview locally
 
 Open `output/index.html` in your browser — that's your portfolio!
 
@@ -82,24 +94,46 @@ The repo includes a `render.yaml` config. Just connect the repo to [Render](http
 ## 🛠️ Tech Stack
 
 | Layer | Technology |
-|---|---|
+|-------|------------|
 | Build | Python 3 |
 | Templating | Jinja2 |
 | Styling | Vanilla CSS (custom properties, grid, flexbox) |
 | Icons | Inline SVG via `icons.py` |
-| Fonts | Inter + JetBrains Mono (Google Fonts) |
+| Fonts | Syne, Playfair Display, Inter, JetBrains Mono (Google Fonts) |
 | Deployment | GitHub Pages / Render.com |
+
+---
+
+## 🎨 Design System
+
+### Colors
+- **Dark mode**: #0a0a0a background, #ff6b35 orange, #00dbe9 cyan, #84cc16 lime
+- **Light mode**: #eeeae3 warm cream background, same accent colors
+- **Footer**: Always #ff6b35 orange regardless of theme
+
+### Typography
+- **Syne**: Headings, display text (bold, modern)
+- **Playfair Display**: Italic text, editorial feel
+- **Inter**: Body text, clean and readable
+- **JetBrains Mono**: Labels, code, technical elements
+
+### Layout Pattern
+- Two-column sections: 1/3 eyebrow label (mono caps) + 2/3 content
+- Bento-style project cards with image overlays
+- Horizontal timeline for education and experience
+- Consistent 128px section padding, 64px gaps
 
 ---
 
 ## 🎨 Customisation
 
 | What | Where |
-|---|---|
+|------|-------|
 | Personal info, projects, skills | `content.py` |
-| Layout & sections | `templates/index.html.j2` |
+| Layout & sections | `templates/index.html.j2` and `templates/project.html.j2` |
 | Colors, fonts, spacing | `static/style.css` (CSS custom properties at the top) |
 | Icons | `icons.py` |
+| Resume file | Project root directory (PDF) |
 
 ---
 
