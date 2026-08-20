@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{ project.title }} | {{ site.title }}</title>
+<meta name="description" content="{{ project.description }}">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Playfair+Display:ital,wght@0,700;1,400;1,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<input type="checkbox" id="theme-toggle" class="visually-hidden" aria-hidden="true">
+<input type="checkbox" id="nav-toggle"   class="visually-hidden" aria-hidden="true">
+
+<div class="site">
+
+  <!-- ── Navbar ── -->
+  <nav class="navbar">
+    <div class="wrap nav-inner">
+      <a href="index.html" class="nav-logo" style="font-family: var(--syne); font-size: 1.5rem; font-weight: 800; color: var(--fg);">SB.</a>
+
+      <div class="nav-links">
+        <a href="index.html#about">About</a>
+        <a href="index.html#projects">Projects</a>
+        <a href="index.html#skills">Skills</a>
+        <a href="index.html#contact">Contact</a>
+        <label for="theme-toggle" class="icon-btn" tabindex="0" aria-label="Toggle theme" style="margin-left: 0.5rem;">
+          {{ icon('sun',  cls='theme-icon-sun',  size=15) | safe }}
+          {{ icon('moon', cls='theme-icon-moon', size=15) | safe }}
+        </label>
+      </div>
+
+      <div style="display:flex;align-items:center;gap:0.5rem;">
+        <label for="nav-toggle" class="icon-btn menu-toggle-btn" tabindex="0" aria-label="Toggle menu">
+          {{ icon('menu', cls='icon-menu', size=17) | safe }}
+          {{ icon('close', cls='icon-close', size=17) | safe }}
+        </label>
+      </div>
+    </div>
+    <div class="wrap mobile-menu">
+      <a href="index.html#about">About</a>
+      <a href="index.html#projects">Projects</a>
+      <a href="index.html#skills">Skills</a>
+      <a href="index.html#contact">Contact</a>
+      <label for="theme-toggle" class="mobile-theme-toggle" tabindex="0" aria-label="Toggle theme">
+        <span class="theme-icon-sun">{{ icon('sun', size=15) | safe }} Light Mode</span>
+        <span class="theme-icon-moon">{{ icon('moon', size=15) | safe }} Dark Mode</span>
+      </label>
+    </div>
+  </nav>
+
+  <main>
+    <!-- ── Project Header ── -->
+    <section class="section-2col">
+      <div class="wrap">
+        <div class="col-label">
+          <span class="eyebrow">PROJECT</span>
+        </div>
+        <div class="col-content">
+          <h1 class="text-display-lg">
+            {{ project.title }}
+          </h1>
+          <p class="text-body-lg" style="color: var(--fg2); max-width: 40rem; margin-bottom: 2rem;">
+            {{ project.description }}
+          </p>
+          <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+            {% if project.github %}
+            <a href="{{ project.github }}" target="_blank" rel="noopener noreferrer" class="btn-primary">
+              {{ icon('github', size=14) | safe }} GitHub
+            </a>
+            {% endif %}
+            {% if project.live %}
+            <a href="{{ project.live }}" target="_blank" rel="noopener noreferrer" class="btn-ghost">
+              {{ icon('external', size=14) | safe }} Live Demo
+            </a>
+            {% endif %}
+            <a href="index.html#projects" class="btn-ghost">
+              ← Back to Projects
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Project Image ── -->
+    <section>
+      <div class="wrap">
+        {% if project.image %}
+        <div class="bento-card" style="padding: 0; overflow: hidden;">
+          <img src="{{ project.image }}" alt="{{ project.title }}" style="width: 100%; height: auto; display: block;">
+        </div>
+        {% endif %}
+      </div>
+    </section>
+
+    <!-- ── Tech Stack ── -->
+    <section class="section-2col">
+      <div class="wrap">
+        <div class="col-label">
+          <span class="eyebrow">TECH_STACK</span>
+        </div>
+        <div class="col-content">
+          <h2 class="text-display-lg">
+            Technologies Used
+          </h2>
+          <div style="display: flex; flex-wrap: wrap; gap: 0.75rem;">
+            {% for tech in project.tech %}
+            <span class="tech-tag">{{ tech }}</span>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Project Details ── -->
+    <section class="section-2col">
+      <div class="wrap">
+        <div class="col-label">
+          <span class="eyebrow">ABOUT</span>
+        </div>
+        <div class="col-content">
+          <h2 class="text-display-lg">
+            Project Overview
+          </h2>
+          <div class="bento-card">
+            <p class="text-body-md" style="color: var(--fg2); line-height: 1.8;">
+              {{ project.description }}
+            </p>
+            {% if project.details %}
+            <p class="text-body-md" style="color: var(--fg2); line-height: 1.8; margin-top: 1rem;">
+              {{ project.details }}
+            </p>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Key Features ── -->
+    {% if project.features %}
+    <section class="section-2col">
+      <div class="wrap">
+        <div class="col-label">
+          <span class="eyebrow">FEATURES</span>
+        </div>
+        <div class="col-content">
+          <h2 class="text-display-lg">
+            Key Features
+          </h2>
+          <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: 1rem;">
+            {% for feature in project.features %}
+            <li style="display: flex; gap: 1rem; align-items: flex-start;">
+              <span style="color: var(--lime); font-size: 1.2rem;">→</span>
+              <span class="text-body-md" style="color: var(--fg2);">{{ feature }}</span>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </section>
+    {% endif %}
+
+    <!-- ── Links & Actions ── -->
+    <section class="section-2col">
+      <div class="wrap">
+        <div class="col-label">
+          <span class="eyebrow">LINKS</span>
+        </div>
+        <div class="col-content">
+          <h2 class="text-display-lg">
+            Project Links
+          </h2>
+          <div class="grid-2">
+            {% if project.github %}
+            <div class="bento-card">
+              <h3 style="font-family: var(--mono); font-size: 0.85rem; font-weight: 600; margin-bottom: 0.5rem; color: var(--fg);">GitHub Repository</h3>
+              <a href="{{ project.github }}" target="_blank" rel="noopener noreferrer" class="btn-ghost" style="font-size: 0.8rem;">
+                {{ icon('github', size=12) | safe }} View on GitHub
+              </a>
+            </div>
+            {% endif %}
+            {% if project.live %}
+            <div class="bento-card">
+              <h3 style="font-family: var(--mono); font-size: 0.85rem; font-weight: 600; margin-bottom: 0.5rem; color: var(--fg);">Live Application</h3>
+              <a href="{{ project.live }}" target="_blank" rel="noopener noreferrer" class="btn-ghost" style="font-size: 0.8rem;">
+                {{ icon('external', size=12) | safe }} Open Live Site
+              </a>
+            </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ── Footer ── -->
+  <footer class="site-footer" id="contact">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-label">GET_IN_TOUCH</div>
+        <div class="footer-content">
+          <h2 class="footer-heading">
+            Let's make<br>
+            <span class="footer-heading-italic">something useful.</span>
+          </h2>
+          <a class="footer-email" href="mailto:{{ contact.email }}">
+            {{ contact.email }} →
+          </a>
+          <div class="footer-meta">
+            <div>
+              <span class="footer-meta-label">PHONE</span>
+              <a href="{{ contact.phone_href }}">{{ contact.phone }}</a>
+            </div>
+            {% if contact.resume %}
+            <div>
+              <span class="footer-meta-label">RESUME</span>
+              <a href="{{ contact.resume }}" download>Download PDF →</a>
+            </div>
+            {% endif %}
+            <p style="flex: 1; min-width: 100%;">{{ contact.note if contact.note else "Feel free to reach out — I'm always excited to connect and discuss new opportunities!" }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-links">
+          <a href="{{ socials[0].url }}">GitHub</a>
+          <a href="{{ socials[1].url }}">LinkedIn</a>
+        </div>
+        <p>{{ footer.copyright }}</p>
+      </div>
+    </div>
+  </footer>
+
+</div>
+</body>
+</html>

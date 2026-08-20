@@ -7,7 +7,7 @@
 <meta name="description" content="{{ site.description }}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Playfair+Display:ital,wght@0,700;1,400;1,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -20,13 +20,14 @@
   <!-- ── Navbar ── -->
   <nav class="navbar">
     <div class="wrap nav-inner">
-      <div class="nav-logo">sayon.dev</div>
+      <a href="#" class="nav-logo" style="font-family: var(--syne); font-size: 1.5rem; font-weight: 800; color: var(--fg);">SB.</a>
 
       <div class="nav-links">
         {% for link in nav_links %}
-        <a href="#{{ link.id }}">{{ link.name }}</a>
+        <a href="#{{ link.id }}" style="text-transform: uppercase; font-size: 0.75rem;">{{ link.name }}</a>
         {% endfor %}
-        <label for="theme-toggle" class="icon-btn" tabindex="0" aria-label="Toggle theme" style="margin-left:0.5rem;">
+        <a href="#contact" class="btn-primary" style="margin-left: 1rem;">Let's talk →</a>
+        <label for="theme-toggle" class="icon-btn" tabindex="0" aria-label="Toggle theme" style="margin-left: 0.5rem;">
           {{ icon('sun',  cls='theme-icon-sun',  size=15) | safe }}
           {{ icon('moon', cls='theme-icon-moon', size=15) | safe }}
         </label>
@@ -41,8 +42,9 @@
     </div>
     <div class="wrap mobile-menu">
       {% for link in nav_links %}
-      <a href="#{{ link.id }}">{{ link.name }}</a>
+      <a href="#{{ link.id }}" style="text-transform: uppercase;">{{ link.name }}</a>
       {% endfor %}
+      <a href="#contact" class="btn-primary" style="margin: 0.5rem 0;">Let's talk →</a>
       <label for="theme-toggle" class="mobile-theme-toggle" tabindex="0" aria-label="Toggle theme">
         <span class="theme-icon-sun">{{ icon('sun', size=15) | safe }} Light Mode</span>
         <span class="theme-icon-moon">{{ icon('moon', size=15) | safe }} Dark Mode</span>
@@ -56,53 +58,149 @@
     <section class="hero">
       <div class="wrap hero-grid">
         <div>
-          <div class="hero-tag">available for opportunities</div>
-          <h1 class="hero-name">{{ hero.first_name }}<br>
-            <span class="grad-text">{{ hero.last_name }}</span>
-          </h1>
-          <div class="hero-roles">
-            <span class="hero-role">{{ hero.role }}</span>
-            <span class="hero-subrole">// {{ hero.subrole }}</span>
+          <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1.5rem;">
+            <span style="width: 8px; height: 8px; background: var(--lime); border-radius: 50%;"></span>
+            <span class="text-label-caps" style="color: var(--fg2);">AVAILABLE FOR OPPORTUNITIES</span>
           </div>
-          <p class="hero-blurb">{{ hero.blurb }}</p>
+          <h1 style="font-family: var(--syne); font-size: clamp(3rem, 8vw, 6rem); font-weight: 800; line-height: 0.95; letter-spacing: -0.03em; margin-bottom: 0.5rem;">
+            Sayon
+          </h1>
+          <h2 style="font-family: var(--playfair); font-style: italic; font-size: clamp(2rem, 5vw, 4rem); font-weight: 400; line-height: 1.1; color: var(--fg);">
+            Biswas
+          </h2>
+          <div style="margin-top: 1.5rem; font-family: var(--mono); font-size: 0.9rem; color: var(--fg2);">
+            Python Developer & Backend Engineer // Aspiring Data Scientist
+          </div>
+          <p class="text-body-lg" style="margin-top: 1.5rem; color: var(--fg2); max-width: 28rem;">
+            {{ hero.blurb }}
+          </p>
           <div class="social-row">
             {% for s in socials %}
-            <a href="{{ s.url }}" target="_blank" rel="noopener noreferrer" aria-label="{{ s.name }}">
-              {{ icon(s.name, size=17) | safe }}
+            <a class="social-btn" href="{{ s.url }}" target="_blank" rel="noopener noreferrer" aria-label="{{ s.name }}">
+              {{ icon(s.name, size=18) | safe }}
             </a>
             {% endfor %}
           </div>
+          {% if contact.resume %}
+          <div style="margin-top: 1.5rem;">
+            <a href="{{ contact.resume }}" download class="btn-primary">
+              Download Resume
+            </a>
+          </div>
+          {% endif %}
         </div>
 
         <div class="hero-photo-wrap">
-          <div class="hero-photo-outer">
-            <div class="hero-photo-inner">
-              {% if hero.photo %}
-              <img src="{{ hero.photo }}" alt="{{ hero.first_name }} {{ hero.last_name }}">
-              {% else %}
-              <div class="hero-photo-placeholder">// add photo in content.py</div>
-              {% endif %}
+          <div class="hero-photo-card">
+            {% if hero.photo %}
+            <img src="{{ hero.photo }}" alt="{{ hero.first_name }} {{ hero.last_name }}">
+            {% else %}
+            <div class="hero-photo-placeholder">// add photo in content.py</div>
+            {% endif %}
+            <div class="hero-photo-location">
+              Jamshedpur / India / 2026
+            </div>
+            <div class="hero-sb-badge">
+              SB.
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ── About ── -->
-    <section id="about">
+    <!-- ── Selected Work (Projects) ── -->
+    <section id="projects" class="section-2col">
       <div class="wrap">
-        <span class="eyebrow">who_i_am</span>
-        <h2 class="section-heading">About <span class="grad-text">Me</span></h2>
-        <div class="section-bar"></div>
-        <div class="grid-2">
-          <div class="about-text">
-            {% for p in about.paragraphs %}<p>{{ p }}</p>{% endfor %}
+        <div class="col-label">
+          <span class="eyebrow">THINGS_I_BUILT</span>
+        </div>
+        <div class="col-content">
+          <h2 class="text-display-lg">
+            Selected <span class="text-italic-serif">work.</span>
+          </h2>
+          <p style="font-family: var(--inter); font-size: 0.9rem; color: var(--fg3); max-width: 20rem; margin-bottom: 3rem;">
+            Projects shaped by curiosity, care, and a lot of Python.
+          </p>
+        </div>
+      </div>
+      <div class="wrap">
+        <p class="text-label-caps" style="color: var(--lime); margin-bottom: 1.5rem;">✓ completed</p>
+        <div class="grid-2" style="margin-bottom: 3rem;">
+          {% for p in projects_completed %}
+          <div class="bento-card" style="padding: 0; overflow: hidden;">
+            <div class="project-img-wrap">
+              <div class="chip-completed">✓ completed</div>
+              {% if p.image %}
+              <img src="{{ p.image }}" alt="{{ p.title }}">
+              {% else %}
+              <div class="img-placeholder">// {{ p.title }}</div>
+              {% endif %}
+              <div class="project-img-meta">
+                <span class="project-num">{{ p.number }}</span>
+                <span class="project-tech-inline">{{ p.tech | join(' / ') }}</span>
+              </div>
+            </div>
+            <div style="padding: 1.5rem;">
+              <h3 style="font-family: var(--syne); font-size: 2rem; font-weight: 700; margin-bottom: 0.75rem;">{{ p.title }}</h3>
+              <p class="text-body-md" style="color: var(--fg2); margin-bottom: 1rem;">{{ p.description }}</p>
+              <a href="project_{{ p.title | project_url }}.html" class="btn-ghost" style="font-size: 0.8rem;">
+                View case study → {{ icon('arrow-right', size=12) | safe }}
+              </a>
+            </div>
           </div>
-          <div style="display:flex;flex-direction:column;gap:1rem;">
+          {% endfor %}
+        </div>
+
+        <p class="text-label-caps" style="color: var(--orange); margin-bottom: 1.5rem;">~ ongoing</p>
+        <div class="grid-2">
+          {% for p in projects_ongoing %}
+          <div class="bento-card" style="padding: 0; overflow: hidden;">
+            <div class="project-img-wrap">
+              <div class="chip-ongoing">~ ongoing</div>
+              {% if p.image %}
+              <img src="{{ p.image }}" alt="{{ p.title }}">
+              {% else %}
+              <div class="img-placeholder">// {{ p.title }}</div>
+              {% endif %}
+              <div class="project-img-meta">
+                <span class="project-num">{{ p.number }}</span>
+                <span class="project-tech-inline">{{ p.tech | join(' / ') }}</span>
+              </div>
+            </div>
+            <div style="padding: 1.5rem;">
+              <h3 style="font-family: var(--syne); font-size: 2rem; font-weight: 700; margin-bottom: 0.75rem;">{{ p.title }}</h3>
+              <p class="text-body-md" style="color: var(--fg2); margin-bottom: 1rem;">{{ p.description }}</p>
+              <a href="project_{{ p.title | project_url }}.html" class="btn-ghost" style="font-size: 0.8rem;">
+                View case study → {{ icon('arrow-right', size=12) | safe }}
+              </a>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+
+    <!-- ── About (Who I Am) ── -->
+    <section id="about" class="section-2col">
+      <div class="wrap">
+        <div class="col-label">
+          <span class="eyebrow">WHO_I_AM</span>
+        </div>
+        <div class="col-content">
+          <h2 class="text-display-lg">
+            Curious by nature.
+          </h2>
+          <h3 class="text-display-lg" style="color: var(--orange); margin-bottom: 1.5rem;">
+            Builder by choice.
+          </h3>
+          <p class="text-body-lg" style="color: var(--fg2); margin-bottom: 2rem;">
+            {% for p in about.paragraphs %}{{ p }}{% endfor %}
+          </p>
+          <div class="grid-2">
             {% for card in about.cards %}
-            <div class="glass-card about-card">
-              <h3>{{ card.title }}</h3>
-              <p>{{ card.text }}</p>
+            <div class="bento-card">
+              <h3 style="font-family: var(--mono); font-size: 0.85rem; font-weight: 600; margin-bottom: 0.5rem; color: var(--fg);">{{ card.title }}</h3>
+              <p style="font-size: 0.9rem; color: var(--fg2); line-height: 1.6;">{{ card.text }}</p>
             </div>
             {% endfor %}
           </div>
@@ -111,220 +209,155 @@
     </section>
 
     <!-- ── Education ── -->
-    <section id="education">
+    <section id="education" class="section-2col">
       <div class="wrap">
-        <span class="eyebrow">academic_background</span>
-        <h2 class="section-heading">My <span class="grad-text">Education</span></h2>
-        <div class="section-bar"></div>
-        {% for e in education %}
-        <div class="glass-card timeline-card">
-          <div class="timeline-top">
-            <div>
-              <h3>{{ e.degree }}</h3>
-              <p class="school">{{ e.school }}</p>
-            </div>
-            <span class="badge-{{ e.accent }}">{{ e.period }}</span>
-          </div>
-          <p class="desc">{{ e.text }}</p>
+        <div class="col-label">
+          <span class="eyebrow">ACADEMIC_BACKGROUND</span>
         </div>
-        {% endfor %}
+        <div class="col-content">
+          <h2 class="text-display-lg">
+            My <span class="text-italic-serif">education.</span>
+          </h2>
+          {% for e in education %}
+          <div class="timeline-row">
+            <div class="timeline-date">{{ e.period }}</div>
+            <div class="timeline-content">
+              <h4>{{ e.degree }}</h4>
+              <p class="timeline-school">{{ e.school }}</p>
+              <p class="timeline-desc">{{ e.text }}</p>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
       </div>
     </section>
 
     <!-- ── Experience ── -->
-    <section id="experience">
+    <section id="experience" class="section-2col">
       <div class="wrap">
-        <span class="eyebrow">work_history</span>
-        <h2 class="section-heading">My <span class="grad-text">Experience</span></h2>
-        <div class="section-bar"></div>
-        {% for job in experience %}
-        <div class="glass-card timeline-card exp-card">
-          <div class="timeline-top">
-            <div>
-              <h3>{{ job.role }}</h3>
-              <p class="school">{{ job.org }}</p>
-            </div>
-            <span class="badge-pill">{{ job.period }}</span>
-          </div>
-          <ul class="exp-list">
-            {% for b in job.bullets %}<li>{{ b }}</li>{% endfor %}
-          </ul>
-          {% if job.tech %}
-          <div class="tech-row" style="margin-top:1rem;">
-            {% for t in job.tech %}<span class="tech-pill">{{ t }}</span>{% endfor %}
-          </div>
-          {% endif %}
-          {% if job.github %}
-          <div style="margin-top:1rem;">
-            <a class="project-link project-link-ghost" href="{{ job.github }}" target="_blank" rel="noopener noreferrer">
-              {{ icon('github', size=13) | safe }} View on GitHub
-            </a>
-          </div>
-          {% endif %}
+        <div class="col-label">
+          <span class="eyebrow">WORK_HISTORY</span>
         </div>
-        {% endfor %}
-      </div>
-    </section>
-
-    <!-- ── Projects ── -->
-    <section id="projects">
-      <div class="wrap">
-        <span class="eyebrow">things_i_built</span>
-        <h2 class="section-heading">My <span class="grad-text">Projects</span></h2>
-        <div class="section-bar"></div>
-
-        <p style="font-family:var(--mono);font-size:0.82rem;color:var(--green);margin-bottom:1.25rem;">✓ completed</p>
-        <div class="grid-3" style="margin-bottom:3rem;">
-          {% for p in projects_completed %}
-          <div class="project-card">
-            <div class="project-image">
-              {% if p.image %}<img src="{{ p.image }}" alt="{{ p.title }}">
-              {% else %}<div class="project-image-placeholder">// {{ p.title }}</div>{% endif %}
-            </div>
-            <div class="project-body">
-              <h3>{{ p.title }}</h3>
-              <p>{{ p.description }}</p>
-              <div class="tech-row">
-                {% for t in p.tech %}<span class="tech-pill">{{ t }}</span>{% endfor %}
+        <div class="col-content">
+          <h2 class="text-display-lg">
+            Learning through <span style="color: var(--orange);">real problems.</span>
+          </h2>
+          {% for job in experience %}
+          <div class="timeline-row">
+            <div class="timeline-date">{{ job.period }}</div>
+            <div class="timeline-content">
+              <h4>{{ job.role }}</h4>
+              <p class="timeline-school">{{ job.org }}</p>
+              <p class="timeline-desc">
+                {% for b in job.bullets %}
+                <span style="color: var(--lime);">→</span> {{ b }}{% if not loop.last %}<br>{% endif %}
+                {% endfor %}
+              </p>
+              {% if job.tech %}
+              <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem;">
+                {% for t in job.tech %}<span class="tech-tag">{{ t }}</span>{% endfor %}
               </div>
-              <div class="project-btns">
-                {% if p.github %}
-                <a class="project-link project-link-ghost" href="{{ p.github }}" target="_blank" rel="noopener noreferrer">
-                  {{ icon('github', size=13) | safe }} GitHub
+              {% endif %}
+              {% if job.github %}
+              <div style="margin-top: 1rem;">
+                <a href="{{ job.github }}" target="_blank" rel="noopener noreferrer" class="btn-ghost" style="font-size: 0.8rem;">
+                  {{ icon('github', size=12) | safe }} View on GitHub
                 </a>
-                {% endif %}
-                {% if p.live %}
-                <a class="project-link" href="{{ p.live }}" target="_blank" rel="noopener noreferrer">
-                  {{ icon('external', size=13) | safe }} Live
-                </a>
-                {% endif %}
               </div>
+              {% endif %}
             </div>
           </div>
           {% endfor %}
         </div>
-
-        <p style="font-family:var(--mono);font-size:0.82rem;color:var(--cyan);margin-bottom:1.25rem;">~ ongoing</p>
-        <div class="grid-3">
-          {% for p in projects_ongoing %}
-          <div class="project-card" style="border-color:rgba(88,166,255,0.2);">
-            <div class="project-image" style="background:linear-gradient(135deg,rgba(88,166,255,0.07),rgba(188,140,255,0.07));">
-              {% if p.image %}<img src="{{ p.image }}" alt="{{ p.title }}">
-              {% else %}<div class="project-image-placeholder">// {{ p.title }}</div>{% endif %}
-            </div>
-            <div class="project-body">
-              <div style="display:flex;align-items:center;gap:0.5rem;flex-wrap:wrap;">
-                <h3 style="margin:0;">{{ p.title }}</h3>
-                <span style="font-family:var(--mono);font-size:0.67rem;font-weight:600;padding:0.15rem 0.5rem;border-radius:999px;background:rgba(88,166,255,0.1);color:var(--cyan);border:1px solid rgba(88,166,255,0.2);white-space:nowrap;">in-progress</span>
-              </div>
-              <p>{{ p.description }}</p>
-              <div class="tech-row">
-                {% for t in p.tech %}<span class="tech-pill">{{ t }}</span>{% endfor %}
-              </div>
-              <div class="project-btns">
-                {% if p.github %}
-                <a class="project-link project-link-ghost" href="{{ p.github }}" target="_blank" rel="noopener noreferrer">
-                  {{ icon('github', size=13) | safe }} GitHub
-                </a>
-                {% endif %}
-                {% if p.live %}
-                <a class="project-link" href="{{ p.live }}" target="_blank" rel="noopener noreferrer">
-                  {{ icon('external', size=13) | safe }} Live
-                </a>
-                {% endif %}
-              </div>
-            </div>
-          </div>
-          {% endfor %}
-        </div>
-
       </div>
     </section>
 
     <!-- ── Skills ── -->
-    <section id="skills">
+    <section id="skills" class="section-2col">
       <div class="wrap">
-        <span class="eyebrow">tech_stack</span>
-        <h2 class="section-heading">My <span class="grad-text">Skills</span></h2>
-        <div class="section-bar"></div>
-        <div class="grid-3">
-          {% for cat in skills %}
-          <div class="glass-card skill-card">
-            <h3>{{ cat.category }}</h3>
-            <div class="skill-pills">
-              {% for s in cat.skills %}<span class="skill-pill">{{ s }}</span>{% endfor %}
-            </div>
+        <div class="col-label">
+          <span class="eyebrow">TECH_STACK</span>
+        </div>
+        <div class="col-content">
+          <h2 class="text-display-lg">
+            Tools for <span style="color: var(--orange);">making things.</span>
+          </h2>
+          <div style="display: flex; flex-wrap: wrap; gap: 0.75rem;">
+            {% for cat in skills %}
+              {% for s in cat.skills %}
+              <span class="tech-tag">{{ s }}</span>
+              {% endfor %}
+            {% endfor %}
           </div>
-          {% endfor %}
         </div>
       </div>
     </section>
 
     <!-- ── Achievements & Certifications ── -->
-    <section id="achievements">
+    <section id="achievements" class="section-2col">
       <div class="wrap">
-        <span class="eyebrow">recognition</span>
-        <h2 class="section-heading">Certifications &amp; <span class="grad-text">Achievements</span></h2>
-        <div class="section-bar"></div>
-
-        <p style="font-family:var(--mono);font-size:0.82rem;color:var(--green);margin-bottom:1.25rem;">✓ achievements</p>
-        <div class="grid-2" style="margin-bottom:2.5rem;">
+        <div class="col-label">
+          <span class="eyebrow">RECOGNITION</span>
+        </div>
+        <div class="col-content">
+          <p class="text-label-caps" style="color: var(--lime); margin-bottom: 1.5rem;">✓ achievements</p>
           {% for a in achievements %}
-          <div class="glass-card achieve-card" style="flex-direction:column;">
-            {% if a.image %}
-            <a href="{{ a.image }}" target="_blank" rel="noopener">
-              <img src="{{ a.image }}" alt="{{ a.title }}" class="achievement-thumb">
-            </a>
-            {% endif %}
-            <div style="display:flex;gap:1rem;align-items:flex-start;">
-              <div class="achieve-icon">{{ icon(a.icon, size=20) | safe }}</div>
+          <div style="border-top: 1px solid var(--border-dim); padding-top: 1.5rem; padding-bottom: 1.5rem;">
+            <div style="display: flex; gap: 1rem; align-items: flex-start;">
+              <div style="width: 2rem; height: 2rem; display: flex; align-items: center; justify-content: center; background: rgba(132,204,22,0.1); border-radius: 2px; color: var(--lime); flex-shrink: 0;">
+                {{ icon(a.icon, size=16) | safe }}
+              </div>
               <div>
-                <h3>{{ a.title }}</h3>
-                <p>{{ a.text }}</p>
+                <h3 style="font-family: var(--syne); font-size: 1.1rem; font-weight: 700; margin-bottom: 0.25rem;">{{ a.title }}</h3>
+                <p style="font-size: 0.9rem; color: var(--fg2); line-height: 1.6;">{{ a.text }}</p>
               </div>
             </div>
           </div>
           {% endfor %}
-        </div>
 
-        <p style="font-family:var(--mono);font-size:0.82rem;color:var(--cyan);margin-bottom:1.25rem;">~ certifications</p>
-        <div class="grid-2">
+          <p class="text-label-caps" style="color: var(--cyan); margin: 2rem 0 1.5rem;">~ certifications</p>
           {% for c in certifications %}
-          <div class="glass-card achieve-card" style="flex-direction:column;">
-            {% if c.image %}
-            <a href="{{ c.image }}" target="_blank" rel="noopener">
-              <img src="{{ c.image }}" alt="{{ c.title }}" class="achievement-thumb">
-            </a>
-            {% endif %}
-            <div style="display:flex;gap:1rem;align-items:flex-start;">
-              <div class="achieve-icon cert-icon">{{ icon(c.icon, size=20) | safe }}</div>
-              <div>
-                <h3>{{ c.title }}</h3>
-                <p>{{ c.text }}</p>
+          <div style="border-top: 1px solid var(--border-dim); padding-top: 1.5rem; padding-bottom: 1.5rem;">
+            <div style="display: flex; gap: 1rem; align-items: flex-start;">
+              <div style="width: 2rem; height: 2rem; display: flex; align-items: center; justify-content: center; background: rgba(0,219,233,0.1); border-radius: 2px; color: var(--cyan); flex-shrink: 0;">
+                {{ icon(c.icon, size=16) | safe }}
+              </div>
+              <div style="flex: 1;">
+                <h3 style="font-family: var(--syne); font-size: 1.1rem; font-weight: 700; margin-bottom: 0.25rem;">{{ c.title }}</h3>
+                <p style="font-size: 0.9rem; color: var(--fg2); line-height: 1.6; margin-bottom: 0.5rem;">{{ c.text }}</p>
+                {% if c.image %}
+                <a href="{{ c.image }}" target="_blank" rel="noopener" style="font-family: var(--mono); font-size: 0.8rem; color: var(--cyan);">View certificate →</a>
+                {% endif %}
               </div>
             </div>
           </div>
           {% endfor %}
         </div>
-
       </div>
     </section>
 
     <!-- ── Clubs (only if non-empty) ── -->
     {% if clubs %}
-    <section id="clubs">
+    <section id="clubs" class="section-2col">
       <div class="wrap">
-        <span class="eyebrow">community</span>
-        <h2 class="section-heading">Clubs &amp; <span class="grad-text2">Communities</span></h2>
-        <div class="section-bar"></div>
-        <div class="grid-2">
+        <div class="col-label">
+          <span class="eyebrow">COMMUNITY</span>
+        </div>
+        <div class="col-content">
+          <h2 class="text-display-lg">
+            Clubs & <span style="color: var(--orange);">Communities</span>
+          </h2>
           {% for c in clubs %}
-          <div class="glass-card achieve-card">
-            <div class="achieve-icon club-icon">{{ icon('users', size=20) | safe }}</div>
-            <div>
-              <h3>{{ c.title }}</h3>
-              <p style="font-size:0.78rem;color:var(--fg3);margin-bottom:0.3rem;font-family:var(--mono);">{{ c.role }}</p>
-              <p>{{ c.text }}</p>
+          <div style="border-top: 1px solid var(--border-dim); padding-top: 1.5rem; padding-bottom: 1.5rem;">
+            <div style="display: flex; gap: 1rem; align-items: flex-start;">
+              <div style="width: 2rem; height: 2rem; display: flex; align-items: center; justify-content: center; background: rgba(255,107,53,0.1); border-radius: 2px; color: var(--orange); flex-shrink: 0;">
+                {{ icon('users', size=16) | safe }}
+              </div>
+              <div>
+                <h3 style="font-family: var(--syne); font-size: 1.1rem; font-weight: 700; margin-bottom: 0.25rem;">{{ c.title }}</h3>
+                <p style="font-family: var(--mono); font-size: 0.8rem; color: var(--fg3); margin-bottom: 0.5rem;">{{ c.role }}</p>
+                <p style="font-size: 0.9rem; color: var(--fg2); line-height: 1.6;">{{ c.text }}</p>
+              </div>
             </div>
           </div>
           {% endfor %}
@@ -333,61 +366,45 @@
     </section>
     {% endif %}
 
-    <!-- ── Contact ── -->
-    <section id="contact">
-      <div class="wrap">
-        <span class="eyebrow">get_in_touch</span>
-        <h2 class="section-heading">Contact <span class="grad-text">Me</span></h2>
-        <div class="section-bar"></div>
-        <div class="grid-2">
-          <div class="glass-card contact-card">
-            <div class="contact-icon-wrap">{{ icon('mail', size=20) | safe }}</div>
-            <span class="contact-label">email</span>
-            <a class="contact-value" href="mailto:{{ contact.email }}">{{ contact.email }}</a>
-          </div>
-          <div class="glass-card contact-card blue">
-            <div class="contact-icon-wrap">{{ icon('phone', size=20) | safe }}</div>
-            <span class="contact-label">phone</span>
-            <a class="contact-value" href="{{ contact.phone_href }}">{{ contact.phone }}</a>
+    <!-- ── Contact / Footer ── -->
+    <footer class="site-footer" id="contact">
+      <div class="footer-inner">
+        <div class="footer-top">
+          <div class="footer-label">GET_IN_TOUCH</div>
+          <div class="footer-content">
+            <h2 class="footer-heading">
+              Let's make<br>
+              <span class="footer-heading-italic">something useful.</span>
+            </h2>
+            <a class="footer-email" href="mailto:{{ contact.email }}">
+              {{ contact.email }} →
+            </a>
+            <div class="footer-meta">
+              <div>
+                <span class="footer-meta-label">PHONE</span>
+                <a href="{{ contact.phone_href }}">{{ contact.phone }}</a>
+              </div>
+              {% if contact.resume %}
+              <div>
+                <span class="footer-meta-label">RESUME</span>
+                <a href="{{ contact.resume }}" download>Download PDF →</a>
+              </div>
+              {% endif %}
+              <p style="flex: 1; min-width: 100%;">{{ contact.note if contact.note else "Feel free to reach out — I'm always excited to connect and discuss new opportunities!" }}</p>
+            </div>
           </div>
         </div>
-        <p class="contact-note">{{ contact.note if contact.note else "Feel free to reach out — I'm always excited to connect and discuss new opportunities!" }}</p>
+        <div class="footer-bottom">
+          <div class="footer-links">
+            <a href="{{ socials[0].url }}">GitHub</a>
+            <a href="{{ socials[1].url }}">LinkedIn</a>
+          </div>
+          <p>{{ footer.copyright }}</p>
+        </div>
       </div>
-    </section>
+    </footer>
 
   </main>
-
-  <!-- ── Footer ── -->
-  <footer class="site-footer">
-    <div class="wrap">
-      <div class="footer-grid">
-        <div class="footer-brand">
-          <h3 class="grad-text">{{ footer.name }}</h3>
-          <p>{{ footer.tagline }}</p>
-        </div>
-        <div class="footer-col">
-          <h4>nav</h4>
-          <ul class="footer-links">
-            <li><a href="#about">about</a></li>
-            <li><a href="#projects">projects</a></li>
-            <li><a href="#skills">skills</a></li>
-            <li><a href="#contact">contact</a></li>
-          </ul>
-        </div>
-        <div class="footer-col">
-          <h4>connect</h4>
-          <div class="footer-socials">
-            {% for s in socials %}
-            <a href="{{ s.url }}" target="_blank" rel="noopener noreferrer" aria-label="{{ s.name }}">
-              {{ icon(s.name, size=15) | safe }}
-            </a>
-            {% endfor %}
-          </div>
-        </div>
-      </div>
-      <div class="footer-bottom">{{ footer.copyright }}</div>
-    </div>
-  </footer>
 
 </div>
 </body>
