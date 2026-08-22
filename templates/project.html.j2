@@ -9,6 +9,295 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Playfair+Display:ital,wght@0,700;1,400;1,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+<style>
+  /* ── Case study extras (scoped to project pages) ── */
+
+  /* Architecture diagram */
+  .cs-arch {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    padding: 2rem;
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    color: var(--fg2);
+    line-height: 2;
+    overflow-x: auto;
+  }
+
+  .cs-arch-layer {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .cs-arch-label {
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--fg3);
+    width: 72px;
+    flex-shrink: 0;
+    padding-top: 0.2rem;
+  }
+
+  .cs-arch-boxes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .cs-arch-box {
+    padding: 0.25rem 0.7rem;
+    border-radius: 2px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  .cs-ab-cyan   { background: rgba(0,219,233,0.08);   border: 1px solid rgba(0,219,233,0.25);   color: var(--cyan); }
+  .cs-ab-lime   { background: rgba(132,204,22,0.08);  border: 1px solid rgba(132,204,22,0.25);  color: var(--lime); }
+  .cs-ab-orange { background: rgba(255,107,53,0.08);  border: 1px solid rgba(255,107,53,0.25);  color: var(--orange); }
+  .cs-ab-dim    { background: rgba(255,255,255,0.04); border: 1px solid var(--border);          color: var(--fg2); }
+
+  .cs-arch-arrow {
+    color: var(--fg3);
+    font-size: 0.8rem;
+    padding-left: 72px;
+    margin-bottom: 0.25rem;
+  }
+
+  /* Security / challenge items */
+  .cs-item-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .cs-item {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    border-top: 1px solid var(--border-dim);
+    padding-top: 1.5rem;
+  }
+
+  .cs-item-icon {
+    font-size: 1.4rem;
+    flex-shrink: 0;
+    width: 2.5rem;
+    text-align: center;
+    line-height: 1;
+    padding-top: 0.1rem;
+  }
+
+  .cs-item h3 {
+    font-family: var(--syne);
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 0.4rem;
+    color: var(--fg);
+  }
+
+  .cs-item p {
+    font-size: 0.88rem;
+    color: var(--fg2);
+    line-height: 1.75;
+  }
+
+  .cs-item code {
+    font-family: var(--mono);
+    font-size: 0.8em;
+    background: rgba(255,255,255,0.07);
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    padding: 0.05em 0.35em;
+    color: var(--cyan);
+  }
+
+  #theme-toggle:checked ~ .site .cs-item code {
+    background: rgba(0,0,0,0.06);
+  }
+
+  /* Challenge cards */
+  .cs-challenge-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  @media (min-width: 768px) {
+    .cs-challenge-grid { grid-template-columns: 1fr 1fr; }
+  }
+
+  .cs-challenge-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    padding: 1.5rem;
+    border-left: 3px solid var(--border);
+  }
+
+  .cs-challenge-card.ch-cyan   { border-left-color: var(--cyan); }
+  .cs-challenge-card.ch-lime   { border-left-color: var(--lime); }
+  .cs-challenge-card.ch-orange { border-left-color: var(--orange); }
+  .cs-challenge-card.ch-fg2    { border-left-color: var(--fg2); }
+
+  .cs-challenge-label {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--fg3);
+    margin-bottom: 0.6rem;
+  }
+
+  .cs-challenge-card h3 {
+    font-family: var(--syne);
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--fg);
+    margin-bottom: 0.6rem;
+  }
+
+  .cs-challenge-card .ch-problem {
+    font-size: 0.85rem;
+    color: var(--fg2);
+    line-height: 1.7;
+    margin-bottom: 0.75rem;
+  }
+
+  .cs-challenge-card .ch-solution {
+    font-size: 0.85rem;
+    color: var(--lime);
+    line-height: 1.7;
+  }
+
+  .cs-challenge-card .ch-solution code {
+    font-family: var(--mono);
+    font-size: 0.8em;
+    background: rgba(132,204,22,0.08);
+    border: 1px solid rgba(132,204,22,0.2);
+    border-radius: 2px;
+    padding: 0.05em 0.35em;
+  }
+
+  /* Tech stack grid */
+  .cs-tech-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 0.75rem;
+  }
+
+  .cs-tech-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    padding: 0.9rem 1.1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    transition: border-color 0.2s;
+  }
+
+  .cs-tech-item:hover { border-color: rgba(0,219,233,0.3); }
+
+  .cs-tech-icon { font-size: 1.2rem; flex-shrink: 0; }
+
+  .cs-tech-name {
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--fg);
+  }
+
+  .cs-tech-role {
+    font-size: 0.7rem;
+    color: var(--fg3);
+    margin-top: 0.1rem;
+  }
+
+  /* Feature grid (2-col cards with icon) */
+  .cs-feature-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  @media (min-width: 640px) {
+    .cs-feature-grid { grid-template-columns: 1fr 1fr; }
+  }
+
+  .cs-feature-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    padding: 1.25rem;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+
+  .cs-feature-card:hover {
+    border-color: rgba(132,204,22,0.3);
+    transform: translateY(-2px);
+  }
+
+  .cs-feature-icon {
+    font-size: 1.5rem;
+    margin-bottom: 0.75rem;
+    display: block;
+  }
+
+  .cs-feature-card h3 {
+    font-family: var(--syne);
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--fg);
+    margin-bottom: 0.4rem;
+  }
+
+  .cs-feature-card p {
+    font-size: 0.83rem;
+    color: var(--fg2);
+    line-height: 1.65;
+  }
+
+  /* Stat pills row */
+  .cs-stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+
+  .cs-stat {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    padding: 1rem 1.5rem;
+    text-align: center;
+    min-width: 100px;
+  }
+
+  .cs-stat-val {
+    font-family: var(--syne);
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: var(--cyan);
+    line-height: 1;
+    margin-bottom: 0.25rem;
+  }
+
+  .cs-stat-lbl {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--fg3);
+  }
+</style>
 </head>
 <body>
 
@@ -21,7 +310,6 @@
   <nav class="navbar">
     <div class="wrap nav-inner">
       <a href="index.html" class="nav-logo" style="font-family: var(--syne); font-size: 1.5rem; font-weight: 800; color: var(--fg);">SB.</a>
-
       <div class="nav-links">
         <a href="index.html#about">About</a>
         <a href="index.html#projects">Projects</a>
@@ -32,7 +320,6 @@
           {{ icon('moon', cls='theme-icon-moon', size=15) | safe }}
         </label>
       </div>
-
       <div style="display:flex;align-items:center;gap:0.5rem;">
         <label for="nav-toggle" class="icon-btn menu-toggle-btn" tabindex="0" aria-label="Toggle menu">
           {{ icon('menu', cls='icon-menu', size=17) | safe }}
@@ -53,107 +340,122 @@
   </nav>
 
   <main>
-    <!-- ── Project Header ── -->
+
+    <!-- ══════════════════════════════════════════════
+         HERO / HEADER
+    ══════════════════════════════════════════════ -->
     <section class="section-2col">
       <div class="wrap">
-        <div class="col-label">
-          <span class="eyebrow">PROJECT</span>
-        </div>
-        <div class="col-content">
-          <h1 class="text-display-lg">
-            {{ project.title }}
-          </h1>
-          <p class="text-body-lg" style="color: var(--fg2); max-width: 40rem; margin-bottom: 2rem;">
-            {{ project.description }}
-          </p>
-          <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
-            {% if project.github %}
-            <a href="{{ project.github }}" target="_blank" rel="noopener noreferrer" class="btn-primary">
-              {{ icon('github', size=14) | safe }} GitHub
-            </a>
+        <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 64px; align-items: start;">
+          <div>
+            <span class="eyebrow">PROJECT</span>
+            {% if project.status %}
+            <div style="margin-top: 1rem;">
+              {% if project.status == 'completed' %}
+              <span style="font-family: var(--mono); font-size: 0.7rem; background: var(--lime); color: #1a1c19; padding: 4px 10px; display: inline-flex; align-items: center; gap: 4px;">✓ completed</span>
+              {% else %}
+              <span style="font-family: var(--mono); font-size: 0.7rem; background: var(--orange); color: #131313; padding: 4px 10px;">~ ongoing</span>
+              {% endif %}
+            </div>
             {% endif %}
-            {% if project.live %}
-            <a href="{{ project.live }}" target="_blank" rel="noopener noreferrer" class="btn-ghost">
-              {{ icon('external', size=14) | safe }} Live Demo
-            </a>
+          </div>
+          <div>
+            <h1 class="text-display-lg" style="margin-bottom: 1rem;">{{ project.title }}</h1>
+            <p class="text-body-lg" style="color: var(--fg2); max-width: 40rem; margin-bottom: 2rem;">{{ project.description }}</p>
+
+            {% if project.stats %}
+            <div class="cs-stats" style="margin-bottom: 2rem;">
+              {% for stat in project.stats %}
+              <div class="cs-stat">
+                <div class="cs-stat-val">{{ stat.value }}</div>
+                <div class="cs-stat-lbl">{{ stat.label }}</div>
+              </div>
+              {% endfor %}
+            </div>
             {% endif %}
-            <a href="index.html#projects" class="btn-ghost">
-              ← Back to Projects
-            </a>
+
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+              {% if project.github %}
+              <a href="{{ project.github }}" target="_blank" rel="noopener noreferrer" class="btn-primary">
+                {{ icon('github', size=14) | safe }} GitHub
+              </a>
+              {% endif %}
+              {% if project.live %}
+              <a href="{{ project.live }}" target="_blank" rel="noopener noreferrer" class="btn-ghost">
+                {{ icon('external', size=14) | safe }} Live Demo
+              </a>
+              {% endif %}
+              <a href="index.html#projects" class="btn-ghost">← Back</a>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ── Project Image ── -->
-    <section>
+    <!-- ══════════════════════════════════════════════
+         HERO IMAGE
+    ══════════════════════════════════════════════ -->
+    {% if project.image %}
+    <section style="padding: 0 0 4rem 0;">
       <div class="wrap">
-        {% if project.image %}
         <div class="bento-card" style="padding: 0; overflow: hidden;">
           <img src="{{ project.image }}" alt="{{ project.title }}" style="width: 100%; height: auto; display: block;">
         </div>
-        {% endif %}
+      </div>
+    </section>
+    {% endif %}
+
+    <!-- ══════════════════════════════════════════════
+         OVERVIEW
+    ══════════════════════════════════════════════ -->
+    <section class="section-2col">
+      <div class="wrap" style="display: grid; grid-template-columns: 1fr 2fr; gap: 64px; align-items: start;">
+        <div><span class="eyebrow">OVERVIEW</span></div>
+        <div>
+          <h2 class="text-display-lg" style="margin-bottom: 1.5rem;">Project Overview</h2>
+          <div class="bento-card">
+            <p class="text-body-md" style="color: var(--fg2); line-height: 1.85;">{{ project.description }}</p>
+            {% if project.details %}
+            <p class="text-body-md" style="color: var(--fg2); line-height: 1.85; margin-top: 1rem;">{{ project.details }}</p>
+            {% endif %}
+          </div>
+        </div>
       </div>
     </section>
 
-    <!-- ── Tech Stack ── -->
+    <!-- ══════════════════════════════════════════════
+         RICH FEATURES (card grid with icons)
+         Used when project.feature_cards is set.
+         Falls back to simple list if only project.features is set.
+    ══════════════════════════════════════════════ -->
+    {% if project.feature_cards %}
     <section class="section-2col">
-      <div class="wrap">
-        <div class="col-label">
-          <span class="eyebrow">TECH_STACK</span>
-        </div>
-        <div class="col-content">
-          <h2 class="text-display-lg">
-            Technologies Used
-          </h2>
-          <div style="display: flex; flex-wrap: wrap; gap: 0.75rem;">
-            {% for tech in project.tech %}
-            <span class="tech-tag">{{ tech }}</span>
+      <div class="wrap" style="display: grid; grid-template-columns: 1fr 2fr; gap: 64px; align-items: start;">
+        <div><span class="eyebrow">FEATURES</span></div>
+        <div>
+          <h2 class="text-display-lg" style="margin-bottom: 1.5rem;">Key Features</h2>
+          <div class="cs-feature-grid">
+            {% for f in project.feature_cards %}
+            <div class="cs-feature-card">
+              {% if f.icon %}<span class="cs-feature-icon">{{ f.icon }}</span>{% endif %}
+              <h3>{{ f.title }}</h3>
+              <p>{{ f.description }}</p>
+            </div>
             {% endfor %}
           </div>
         </div>
       </div>
     </section>
-
-    <!-- ── Project Details ── -->
+    {% elif project.features %}
     <section class="section-2col">
-      <div class="wrap">
-        <div class="col-label">
-          <span class="eyebrow">ABOUT</span>
-        </div>
-        <div class="col-content">
-          <h2 class="text-display-lg">
-            Project Overview
-          </h2>
-          <div class="bento-card">
-            <p class="text-body-md" style="color: var(--fg2); line-height: 1.8;">
-              {{ project.description }}
-            </p>
-            {% if project.details %}
-            <p class="text-body-md" style="color: var(--fg2); line-height: 1.8; margin-top: 1rem;">
-              {{ project.details }}
-            </p>
-            {% endif %}
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ── Key Features ── -->
-    {% if project.features %}
-    <section class="section-2col">
-      <div class="wrap">
-        <div class="col-label">
-          <span class="eyebrow">FEATURES</span>
-        </div>
-        <div class="col-content">
-          <h2 class="text-display-lg">
-            Key Features
-          </h2>
+      <div class="wrap" style="display: grid; grid-template-columns: 1fr 2fr; gap: 64px; align-items: start;">
+        <div><span class="eyebrow">FEATURES</span></div>
+        <div>
+          <h2 class="text-display-lg" style="margin-bottom: 1.5rem;">Key Features</h2>
           <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: 1rem;">
             {% for feature in project.features %}
             <li style="display: flex; gap: 1rem; align-items: flex-start;">
-              <span style="color: var(--lime); font-size: 1.2rem;">→</span>
+              <span style="color: var(--lime); font-size: 1.1rem; flex-shrink: 0;">→</span>
               <span class="text-body-md" style="color: var(--fg2);">{{ feature }}</span>
             </li>
             {% endfor %}
@@ -163,20 +465,156 @@
     </section>
     {% endif %}
 
-    <!-- ── Links & Actions ── -->
+    <!-- ══════════════════════════════════════════════
+         ARCHITECTURE
+         Optional: project.architecture = list of layers
+         Each layer: { label, boxes: [{text, style}], arrow_after }
+    ══════════════════════════════════════════════ -->
+    {% if project.architecture %}
     <section class="section-2col">
-      <div class="wrap">
-        <div class="col-label">
-          <span class="eyebrow">LINKS</span>
+      <div class="wrap" style="display: grid; grid-template-columns: 1fr 2fr; gap: 64px; align-items: start;">
+        <div><span class="eyebrow">ARCHITECTURE</span></div>
+        <div>
+          <h2 class="text-display-lg" style="margin-bottom: 1.5rem;">System Architecture</h2>
+          {% if project.arch_description %}
+          <p class="text-body-md" style="color: var(--fg2); margin-bottom: 1.5rem;">{{ project.arch_description }}</p>
+          {% endif %}
+          <div class="cs-arch">
+            {% for layer in project.architecture %}
+            <div class="cs-arch-layer">
+              <span class="cs-arch-label">{{ layer.label }}</span>
+              <div class="cs-arch-boxes">
+                {% for box in layer.boxes %}
+                <span class="cs-arch-box cs-ab-{{ box.style | default('dim') }}">{{ box.text }}</span>
+                {% endfor %}
+              </div>
+            </div>
+            {% if layer.arrow_after %}
+            <div class="cs-arch-arrow">↓</div>
+            {% endif %}
+            {% endfor %}
+          </div>
         </div>
-        <div class="col-content">
-          <h2 class="text-display-lg">
-            Project Links
-          </h2>
+      </div>
+    </section>
+    {% endif %}
+
+    <!-- ══════════════════════════════════════════════
+         SECURITY
+         Optional: project.security = list of items
+         Each: { icon, title, description }
+    ══════════════════════════════════════════════ -->
+    {% if project.security %}
+    <section class="section-2col">
+      <div class="wrap" style="display: grid; grid-template-columns: 1fr 2fr; gap: 64px; align-items: start;">
+        <div><span class="eyebrow">SECURITY</span></div>
+        <div>
+          <h2 class="text-display-lg" style="margin-bottom: 1.5rem;">Security Design</h2>
+          {% if project.security_description %}
+          <p class="text-body-md" style="color: var(--fg2); margin-bottom: 1.5rem;">{{ project.security_description }}</p>
+          {% endif %}
+          <div class="cs-item-grid">
+            {% for s in project.security %}
+            <div class="cs-item">
+              <div class="cs-item-icon">{{ s.icon }}</div>
+              <div>
+                <h3>{{ s.title }}</h3>
+                <p>{{ s.description | safe }}</p>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </section>
+    {% endif %}
+
+    <!-- ══════════════════════════════════════════════
+         CHALLENGES & SOLUTIONS
+         Optional: project.challenges = list of cards
+         Each: { accent (cyan/lime/orange/fg2), label, title, problem, solution }
+    ══════════════════════════════════════════════ -->
+    {% if project.challenges %}
+    <section class="section-2col">
+      <div class="wrap" style="display: grid; grid-template-columns: 1fr 2fr; gap: 64px; align-items: start;">
+        <div><span class="eyebrow">CHALLENGES</span></div>
+        <div>
+          <h2 class="text-display-lg" style="margin-bottom: 0.5rem;">Engineering Challenges</h2>
+          <p class="text-body-md" style="color: var(--fg2); margin-bottom: 1.5rem;">
+            {{ project.challenges_intro if project.challenges_intro else "Real problems that pushed beyond typical project scope." }}
+          </p>
+          <div class="cs-challenge-grid">
+            {% for c in project.challenges %}
+            <div class="cs-challenge-card ch-{{ c.accent | default('cyan') }}">
+              <div class="cs-challenge-label">{{ c.label }}</div>
+              <h3>{{ c.title }}</h3>
+              <p class="ch-problem">{{ c.problem }}</p>
+              <p class="ch-solution">→ {{ c.solution | safe }}</p>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </section>
+    {% endif %}
+
+    <!-- ══════════════════════════════════════════════
+         TECH STACK (rich grid with icons)
+         Optional: project.tech_stack = list of items
+         Each: { icon, name, role }
+         Falls back to tag pills if only project.tech is set.
+    ══════════════════════════════════════════════ -->
+    {% if project.tech_stack %}
+    <section class="section-2col">
+      <div class="wrap" style="display: grid; grid-template-columns: 1fr 2fr; gap: 64px; align-items: start;">
+        <div><span class="eyebrow">TECH_STACK</span></div>
+        <div>
+          <h2 class="text-display-lg" style="margin-bottom: 1.5rem;">Technologies Used</h2>
+          {% if project.tech_stack_description %}
+          <p class="text-body-md" style="color: var(--fg2); margin-bottom: 1.5rem;">{{ project.tech_stack_description }}</p>
+          {% endif %}
+          <div class="cs-tech-grid">
+            {% for t in project.tech_stack %}
+            <div class="cs-tech-item">
+              <span class="cs-tech-icon">{{ t.icon }}</span>
+              <div>
+                <div class="cs-tech-name">{{ t.name }}</div>
+                <div class="cs-tech-role">{{ t.role }}</div>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </section>
+    {% elif project.tech %}
+    <section class="section-2col">
+      <div class="wrap" style="display: grid; grid-template-columns: 1fr 2fr; gap: 64px; align-items: start;">
+        <div><span class="eyebrow">TECH_STACK</span></div>
+        <div>
+          <h2 class="text-display-lg" style="margin-bottom: 1.5rem;">Technologies Used</h2>
+          <div style="display: flex; flex-wrap: wrap; gap: 0.75rem;">
+            {% for t in project.tech %}
+            <span class="tech-tag">{{ t }}</span>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </section>
+    {% endif %}
+
+    <!-- ══════════════════════════════════════════════
+         LINKS
+    ══════════════════════════════════════════════ -->
+    <section class="section-2col">
+      <div class="wrap" style="display: grid; grid-template-columns: 1fr 2fr; gap: 64px; align-items: start;">
+        <div><span class="eyebrow">LINKS</span></div>
+        <div>
+          <h2 class="text-display-lg" style="margin-bottom: 1.5rem;">Project Links</h2>
           <div class="grid-2">
             {% if project.github %}
             <div class="bento-card">
-              <h3 style="font-family: var(--mono); font-size: 0.85rem; font-weight: 600; margin-bottom: 0.5rem; color: var(--fg);">GitHub Repository</h3>
+              <h3 style="font-family: var(--mono); font-size: 0.85rem; font-weight: 600; margin-bottom: 0.75rem; color: var(--fg);">GitHub Repository</h3>
               <a href="{{ project.github }}" target="_blank" rel="noopener noreferrer" class="btn-ghost" style="font-size: 0.8rem;">
                 {{ icon('github', size=12) | safe }} View on GitHub
               </a>
@@ -184,7 +622,7 @@
             {% endif %}
             {% if project.live %}
             <div class="bento-card">
-              <h3 style="font-family: var(--mono); font-size: 0.85rem; font-weight: 600; margin-bottom: 0.5rem; color: var(--fg);">Live Application</h3>
+              <h3 style="font-family: var(--mono); font-size: 0.85rem; font-weight: 600; margin-bottom: 0.75rem; color: var(--fg);">Live Application</h3>
               <a href="{{ project.live }}" target="_blank" rel="noopener noreferrer" class="btn-ghost" style="font-size: 0.8rem;">
                 {{ icon('external', size=12) | safe }} Open Live Site
               </a>

@@ -105,21 +105,283 @@ EXPERIENCE = [
 
 PROJECTS_COMPLETED = [
     {
-        "number": "01",
-        "title": "IWT Examination Web Application",
-        "description": "A comprehensive backend web application featuring a functional dashboard, secure user authentication, and a dynamic examination system with a relational database.",
-        "details": "Built during my internship at Syllogistek Systems, this application demonstrates full-stack development skills with JSP, PostgreSQL, and REST API integration. The system handles user authentication, exam creation, student management, and result processing with a clean, intuitive interface.",
-        "features": [
-            "Secure user authentication and session management",
-            "Dynamic examination creation and scheduling",
-            "Real-time result processing and grading system",
-            "Admin dashboard for comprehensive system management",
-            "Responsive design for mobile and desktop access"
+        "title": "ExamHub",
+        "number": "01",  # change to match your numbering
+        "status": "completed",  # "completed" | "ongoing"
+        "image": "examhub.png",  # e.g. "examhub_preview.png" — place in static/
+        "description": (
+            "An online exam management system built with Java + JSP + PostgreSQL, "
+            "featuring AI-powered question generation via Google Gemini, async job "
+            "processing, and a hardened security layer — all containerised with Docker."
+        ),
+        "tech": ["Java 21", "JSP", "Tomcat 9", "PostgreSQL", "Gemini AI", "Docker", "Maven", "BCrypt"],
+
+        # ── Extended case study fields (used by project.html.j2) ──
+
+        "details": (
+            "Built as an IWT lab project with Suranjeet Behera. The system handles "
+            "student registration, role-based dashboards, AI-generated question sets by "
+            "topic, timed exams, result analytics, PDF report merging, and a full admin "
+            "control panel — all served from a single Tomcat 9 servlet container."
+        ),
+
+        "stats": [
+            {"value": "5+", "label": "Security Layers"},
+            {"value": "15s", "label": "AI Response (async)"},
+            {"value": "100%", "label": "Prepared Statements"},
+            {"value": "3", "label": "User Roles"},
         ],
-        "tech": ["JSP", "PostgreSQL", "SQL"],
+
+        "feature_cards": [
+            {
+                "icon": "🤖",
+                "title": "AI Question Generation",
+                "description": (
+                    "Google Gemini generates topic-specific MCQs on demand. "
+                    "An async JobStore runs generation off the HTTP thread; "
+                    "the browser polls for completion every 2 seconds."
+                ),
+            },
+            {
+                "icon": "📋",
+                "title": "Role-Based Dashboards",
+                "description": (
+                    "Three roles — Student, Teacher, Admin — each with a dedicated "
+                    "dashboard. Admins see live analytics, manage users, and "
+                    "download merged PDF reports via Apache PDFBox."
+                ),
+            },
+            {
+                "icon": "⏱️",
+                "title": "Timed Exam Engine",
+                "description": (
+                    "Exams run with a server-enforced timer. Flushed HTTP response "
+                    "buffering streams the loading skeleton instantly; questions "
+                    "appear without a blank-screen wait."
+                ),
+            },
+            {
+                "icon": "🔒",
+                "title": "Hardened Security",
+                "description": (
+                    "BCrypt password hashing, CSRF tokens, rate limiting (5 failures "
+                    "→ 15-min lockout), HTTP security headers, HttpOnly+Secure cookies, "
+                    "and 100% parameterised SQL queries."
+                ),
+            },
+            {
+                "icon": "📑",
+                "title": "PDF Report Merging",
+                "description": (
+                    "Apache PDFBox merges individual result pages into a single "
+                    "downloadable report. Admins can export results for any exam "
+                    "or date range with one click."
+                ),
+            },
+            {
+                "icon": "🐳",
+                "title": "Containerised Deployment",
+                "description": (
+                    "Docker Compose orchestrates the Tomcat app server and "
+                    "PostgreSQL database. A single `docker-compose up` spins "
+                    "the full stack locally or on any cloud VM."
+                ),
+            },
+        ],
+
+        "architecture": [
+            {
+                "label": "Client",
+                "boxes": [
+                    {"text": "Browser / JSP Pages", "style": "dim"},
+                    {"text": "Vanilla JS + Fetch", "style": "dim"},
+                ],
+                "arrow_after": True,
+            },
+            {
+                "label": "Servlet",
+                "boxes": [
+                    {"text": "Tomcat 9", "style": "cyan"},
+                    {"text": "Servlets", "style": "cyan"},
+                    {"text": "Filters (Auth / Rate Limit / Security Headers)", "style": "cyan"},
+                ],
+                "arrow_after": True,
+            },
+            {
+                "label": "Services",
+                "boxes": [
+                    {"text": "JobStore (ExecutorService)", "style": "lime"},
+                    {"text": "QuestionCache", "style": "lime"},
+                    {"text": "AIUtils → Gemini API", "style": "lime"},
+                    {"text": "PDFBox Merger", "style": "lime"},
+                ],
+                "arrow_after": True,
+            },
+            {
+                "label": "Data",
+                "boxes": [
+                    {"text": "PostgreSQL", "style": "orange"},
+                    {"text": "PreparedStatements only", "style": "dim"},
+                ],
+                "arrow_after": False,
+            },
+        ],
+
+        "arch_description": (
+            "A classic layered servlet architecture: JSP views talk to servlets, "
+            "which delegate to service classes. A custom async job queue decouples "
+            "slow AI calls from HTTP threads. All DB access goes through prepared statements."
+        ),
+
+        "security": [
+            {
+                "icon": "🔑",
+                "title": "BCrypt Password Hashing",
+                "description": (
+                    "All passwords are hashed with <code>jbcrypt</code> before storage. "
+                    "Plain-text passwords never touch the database."
+                ),
+            },
+            {
+                "icon": "🛡️",
+                "title": "CSRF Protection",
+                "description": (
+                    "Every state-changing form includes a server-generated CSRF token "
+                    "stored in the session. The <code>CsrfFilter</code> rejects any "
+                    "POST missing a matching token."
+                ),
+            },
+            {
+                "icon": "🚦",
+                "title": "Rate Limiting",
+                "description": (
+                    "The <code>RateLimitFilter</code> tracks failed login/register attempts "
+                    "by IP. After 5 failures, the IP is locked out for 15 minutes with "
+                    "an HTTP 429. Counters reset automatically."
+                ),
+            },
+            {
+                "icon": "📋",
+                "title": "HTTP Security Headers",
+                "description": (
+                    "Every response includes <code>Content-Security-Policy</code>, "
+                    "<code>X-Frame-Options: DENY</code>, <code>X-Content-Type-Options: nosniff</code>, "
+                    "<code>HSTS</code>, <code>Referrer-Policy</code>, and <code>Permissions-Policy</code>."
+                ),
+            },
+            {
+                "icon": "🍪",
+                "title": "Secure Session Cookies",
+                "description": (
+                    "Session cookies are set as <code>HttpOnly</code>, <code>Secure</code>, "
+                    "and <code>SameSite=Strict</code>. Sessions are fully regenerated on "
+                    "login to prevent session fixation."
+                ),
+            },
+            {
+                "icon": "💉",
+                "title": "SQL Injection Prevention",
+                "description": (
+                    "All queries use <code>PreparedStatement</code> with parameterised values. "
+                    "No string concatenation in SQL. Dynamic IN clauses use placeholder arrays."
+                ),
+            },
+        ],
+
+        "security_description": (
+            "Security was treated as a first-class requirement, not an afterthought. "
+            "Six independent defence layers cover authentication, transport, and data integrity."
+        ),
+
+        "challenges_intro": (
+            "Four real engineering problems that pushed beyond typical lab-project scope."
+        ),
+
+        "challenges": [
+            {
+                "accent": "cyan",
+                "label": "⚡ Performance",
+                "title": "AI Latency Blocking HTTP Threads",
+                "problem": (
+                    "Gemini API calls take 15–60 seconds. Running them synchronously "
+                    "on a Tomcat thread would exhaust the thread pool under moderate load."
+                ),
+                "solution": (
+                    "Built a custom async job queue (<code>JobStore</code>) using "
+                    "<code>ExecutorService</code> and <code>ConcurrentHashMap</code>. "
+                    "The HTTP thread starts a job and redirects in milliseconds; "
+                    "the browser polls <code>jobStatus.jsp</code> every 2 s."
+                ),
+            },
+            {
+                "accent": "lime",
+                "label": "🗄️ Data Consistency",
+                "title": "Stale Questions After AI Regeneration",
+                "problem": (
+                    "The question cache stores sets by topic. When AI regenerates "
+                    "questions, the cache keeps serving the old set even after fresh "
+                    "rows are inserted."
+                ),
+                "solution": (
+                    "Added <code>QuestionCache.invalidate()</code>, called by "
+                    "<code>AIUtils.prepareTopicForAI()</code> before clearing old "
+                    "questions. The next exam load fetches fresh data and repopulates."
+                ),
+            },
+            {
+                "accent": "orange",
+                "label": "🖥️ UX / Rendering",
+                "title": "Blank Screen During Database Queries",
+                "problem": (
+                    "Tomcat's default JSP buffering meant users saw a completely "
+                    "blank page for the entire duration of the DB query on exam.jsp."
+                ),
+                "solution": (
+                    "Called <code>response.setBufferSize(0)</code> and flushed after "
+                    "writing the loading overlay. The spinner renders instantly; "
+                    "a JS <code>window.onload</code> swap then hides the skeleton."
+                ),
+            },
+            {
+                "accent": "fg2",
+                "label": "🔒 Code Structure",
+                "title": "JSP Scriptlet Scope Bug in Admin Dashboard",
+                "problem": (
+                    "The <code>renderHtmlTable()</code> helper was declared inside a "
+                    "<code>&lt;%!</code> block where the implicit <code>out</code> "
+                    "object isn't available — causing a runtime error."
+                ),
+                "solution": (
+                    "Refactored to build HTML into a <code>StringBuilder</code> and "
+                    "return a String. The calling scriptlet renders via "
+                    "<code>out.print()</code>, cleanly separating method logic from "
+                    "JSP output handling."
+                ),
+            },
+        ],
+
+        "tech_stack": [
+            {"icon": "☕", "name": "Java 21", "role": "Language"},
+            {"icon": "🐱", "name": "Tomcat 9", "role": "Servlet Container"},
+            {"icon": "📄", "name": "JSP / Servlets", "role": "Presentation Layer"},
+            {"icon": "🐘", "name": "PostgreSQL", "role": "Primary Database"},
+            {"icon": "📦", "name": "Maven", "role": "Build Tool"},
+            {"icon": "🤖", "name": "Google Gemini AI", "role": "Question Generation"},
+            {"icon": "🔑", "name": "BCrypt (jbcrypt)", "role": "Password Hashing"},
+            {"icon": "📑", "name": "Apache PDFBox", "role": "PDF Merging"},
+            {"icon": "🐳", "name": "Docker", "role": "Containerisation"},
+            {"icon": "🎨", "name": "CSS Custom Properties", "role": "Design System"},
+            {"icon": "⚡", "name": "Vanilla JS / Fetch", "role": "Client Interactions"},
+            {"icon": "🎉", "name": "canvas-confetti", "role": "Result Celebration"},
+        ],
+
+        "tech_stack_description": (
+            "A deliberate mix of classic enterprise Java with modern AI APIs "
+            "and containerised deployment."
+        ),
+
         "github": "https://github.com/SayonBiswas/IWT",
         "live": "https://examhub-q9ez.onrender.com",
-        "image": "examhub.png",
     },
     {
         "number": "02",
