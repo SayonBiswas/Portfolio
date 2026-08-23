@@ -424,6 +424,22 @@ PROJECTS_ONGOING = [
         "live": "",
         "image": "ipl-website.png",
     },
+    {
+        "number": "04",
+        "title": "CodeReview",
+        "difficulty": "medium",  # "basic" | "medium" | "advanced"
+        "description": "A code review platform for analyzing and improving code quality through automated analysis and collaborative feedback.",
+        "details": "Details to be added soon.",
+        "features": [
+            "Automated code analysis",
+            "Collaborative review features",
+            "Code quality metrics"
+        ],
+        "tech": ["TBD"],
+        "github": "",
+        "live": "",
+        "image": "",
+    },
 ]
 
 SKILLS = [
