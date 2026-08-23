@@ -108,7 +108,9 @@ PROJECTS_COMPLETED = [
         "title": "ExamHub",
         "number": "01",  # change to match your numbering
         "status": "completed",  # "completed" | "ongoing"
-        "image": "examhub.png",  # e.g. "examhub_preview.png" — place in static/
+        "image": "examhub1.png",  # e.g. "examhub_preview.png" — place in static/
+        "case_study_image": "examhub2.png",  # Image for detailed case study page
+        "difficulty": "advanced",  # "basic" | "medium" | "advanced"
         "description": (
             "An online exam management system built with Java + JSP + PostgreSQL, "
             "featuring AI-powered question generation via Google Gemini, async job "
@@ -386,6 +388,7 @@ PROJECTS_COMPLETED = [
     {
         "number": "02",
         "title": "Student Management Website",
+        "difficulty": "medium",  # "basic" | "medium" | "advanced"
         "description": "A full-featured student management web application for managing student records with a clean interface and robust backend functionality.",
         "details": "This student management system provides educational institutions with a comprehensive tool for managing student data, academic records, and administrative tasks. The application features a user-friendly interface with efficient CRUD operations and data visualization capabilities.",
         "features": [
@@ -400,29 +403,13 @@ PROJECTS_COMPLETED = [
         "live": "http://studentmanagement-env.eba-uup6bgvc.ap-south-2.elasticbeanstalk.com",
         "image": "student_management.png",
     },
-    {
-        "number": "03",
-        "title": "Personal Portfolio Website",
-        "description": "A fully static portfolio website built entirely with Python and Jinja2 — no JavaScript. Features dark/light theme toggle via CSS-only checkbox hack, hosted on Render.",
-        "details": "This portfolio website represents my approach to clean, efficient web development without relying on JavaScript frameworks. Built using Python for template rendering and CSS for all interactivity, it demonstrates fundamental web development principles and modern CSS techniques.",
-        "features": [
-            "CSS-only dark/light theme toggle using checkbox hack",
-            "Fully responsive design with mobile-first approach",
-            "Optimized performance with no JavaScript dependencies",
-            "Clean, maintainable code structure with Jinja2 templates",
-            "SEO-friendly with semantic HTML structure"
-        ],
-        "tech": ["Python", "Jinja2", "CSS", "Render"],
-        "github": "https://github.com/SayonBiswas/Portfolio",
-        "live": "https://portfolio-u2go.onrender.com",
-        "image": "portfolio.png",
-    },
 ]
 
 PROJECTS_ONGOING = [
     {
-        "number": "04",
+        "number": "03",
         "title": "IPL Website",
+        "difficulty": "basic",  # "basic" | "medium" | "advanced"
         "description": "An ongoing IPL cricket website project featuring team and player information, match details, and tournament statistics.",
         "details": "Currently in development, this IPL cricket website aims to provide comprehensive coverage of IPL tournaments with team statistics, player profiles, match schedules, and live score updates. The project focuses on creating an engaging user experience for cricket fans.",
         "features": [
@@ -435,7 +422,7 @@ PROJECTS_ONGOING = [
         "tech": ["HTML", "CSS", "JavaScript"],
         "github": "https://github.com/SayonBiswas/IPL_Website",
         "live": "",
-        "image": "",
+        "image": "ipl-website.png",
     },
 ]
 
@@ -473,10 +460,18 @@ SKILLS_FLAT = [
 
 ACHIEVEMENTS = [
     {
+        "title": "Bharatiya Antariksh Hackathon 2026 – ISRO",
+        "text": "Participated in the Bharatiya Antariksh Hackathon 2026, hosted by ISRO and powered by Hack2skill. Team submitted an idea addressing real-world space challenges. Reached Round 1 PPT screening phase as part of this national innovation initiative focused on aerospace technology applications.",
+        "icon": "trophy",
+        "image": "BAH-ISRO.jpg",
+        "link": "BAH-ISRO.jpg",
+    },
+    {
         "title": "CodeVerse – Certificate of Participation",
         "text": "Participated in CodeVerse, held as part of NIRMAN 5.0 organized by the Silicon Innovation and Promotion Cell (SIPC) at Silicon University, Odisha, from 28th–30th November 2025 and went upto the 3rd/final round of the competition.",
         "icon": "trophy",
         "image": "CodeVerse.jpeg",
+        "link": "CodeVerse.jpeg",
     },
 ]
 

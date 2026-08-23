@@ -349,15 +349,18 @@
         <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 64px; align-items: start;">
           <div>
             <span class="eyebrow">PROJECT</span>
-            {% if project.status %}
             <div style="margin-top: 1rem;">
+              {% if project.status %}
               {% if project.status == 'completed' %}
               <span style="font-family: var(--mono); font-size: 0.7rem; background: var(--lime); color: #1a1c19; padding: 4px 10px; display: inline-flex; align-items: center; gap: 4px;">✓ completed</span>
               {% else %}
               <span style="font-family: var(--mono); font-size: 0.7rem; background: var(--orange); color: #131313; padding: 4px 10px;">~ ongoing</span>
               {% endif %}
+              {% endif %}
+              {% if project.difficulty %}
+              <span style="font-family: var(--mono); font-size: 0.7rem; background: {% if project.difficulty == 'advanced' %}var(--cyan){% elif project.difficulty == 'medium' %}var(--orange){% else %}var(--fg3){% endif %}; color: {% if project.difficulty == 'advanced' %}#000{% elif project.difficulty == 'medium' %}#000{% else %}var(--fg){% endif %}; padding: 4px 10px; display: inline-flex; align-items: center; gap: 4px; {% if project.status %}margin-left: 0.5rem;{% endif %}">{{ project.difficulty | upper }}</span>
+              {% endif %}
             </div>
-            {% endif %}
           </div>
           <div>
             <h1 class="text-display-lg" style="margin-bottom: 1rem;">{{ project.title }}</h1>
@@ -395,7 +398,15 @@
     <!-- ══════════════════════════════════════════════
          HERO IMAGE
     ══════════════════════════════════════════════ -->
-    {% if project.image %}
+    {% if project.case_study_image %}
+    <section style="padding: 0 0 4rem 0;">
+      <div class="wrap">
+        <div class="bento-card" style="padding: 0; overflow: hidden;">
+          <img src="{{ project.case_study_image }}" alt="{{ project.title }}" style="width: 100%; height: auto; display: block;">
+        </div>
+      </div>
+    </section>
+    {% elif project.image %}
     <section style="padding: 0 0 4rem 0;">
       <div class="wrap">
         <div class="bento-card" style="padding: 0; overflow: hidden;">
