@@ -87,6 +87,22 @@ EDUCATION = [
 
 EXPERIENCE = [
     {
+        "role": "AWS Data Engineering & DevOps Industrial Trainee",
+        "org": "Ingenious-TechWorld (ITW) · Silicon University, Odisha",
+        "period": "May 2026—Jun 2026",
+        "github": "https://github.com/SayonBiswas/AWS-Project-Details",
+        "tech": ["AWS", "EC2", "S3", "Glue", "Athena", "Lambda", "Terraform", "Jenkins", "Ansible", "Docker",
+                 "Kubernetes", "EKS"],
+        "bullets": [
+            "Completed a 5-week industrial training programme on AWS Data Engineering & DevOps by Ingenious-TechWorld, covering cloud fundamentals through to container orchestration",
+            "Built an AWS Data Pipeline project using Glue, Athena, Lambda, and S3 — implementing ETL workflows and serverless data processing on the cloud",
+            "Built a Jenkins CI/CD Pipeline project — setting up automated build, test, and deployment workflows with Ansible playbook integration and CI/CD deployment over AWS",
+            "Gained hands-on exposure to Infrastructure as Code with Terraform — writing configuration files, managing providers, modules, and provisioning EC2 instances and VPCs",
+            "Worked with container technologies including Docker and Kubernetes (Minikube, EKS/ECS) — understanding container architecture, K8s orchestration, and cloud-native deployment",
+            "Earned a Certificate of Appreciation from ITW and Silicon University for successful programme completion",
+        ],
+    },
+    {
         "role": "Python Application Development Summer Intern",
         "org": "Syllogistek Systems Private Ltd.",
         "period": "Jun 2025—Jul 2025",
@@ -99,19 +115,6 @@ EXPERIENCE = [
             "Built comprehensive API logic for a Lost & Found module, allowing users to securely post and view lost or found items",
             "Designed structured JSON-based request and response formats to ensure consistent and scalable data exchange",
             "Connected API endpoints with backend database logic to ensure reliable data handling and system integrity",
-        ],
-    },
-
-    {
-        "role": "AWS Data Engineering & DevOps Industrial Trainee",
-        "org": "Ingenious-TechWorld (ITW) · Silicon University, Odisha",
-        "period": "May 2026—Jun 2026",
-        "github": "https://github.com/SayonBiswas/AWS-Project-Details",
-        "tech": ["AWS", "Data Engineering", "DevOps", "Cloud Infrastructure"],
-        "bullets": [
-            "Completed an intensive industrial training program on AWS Data Engineering & DevOps by Ingenious-TechWorld",
-            "Gained hands-on exposure to cloud-based data pipelines, infrastructure management, and DevOps practices on AWS",
-            "Earned a Certificate of Appreciation from ITW and Silicon University for successful programme completion",
         ],
     },
 ]
@@ -936,6 +939,13 @@ SKILLS_FLAT = [
 
 ACHIEVEMENTS = [
     {
+        "title": "Adobe University Hackathon – Certificate of Participation",
+        "text": "Participated in the Adobe University Hackathon organised by Adobe via Unstop, representing Silicon Institute of Technology (SIT), Bhubaneswar, Odisha. Dated 9th August 2026.",
+        "icon": "trophy",
+        "image": "adobe-hackathon.jpg",
+        "link": "adobe-hackathon.jpg",
+    },
+    {
         "title": "Bharatiya Antariksh Hackathon 2026 – ISRO",
         "text": "Participated in the Bharatiya Antariksh Hackathon 2026, hosted by ISRO and powered by Hack2skill. Team submitted an idea addressing real-world space challenges. Reached Round 1 PPT screening phase as part of this national innovation initiative focused on aerospace technology applications.",
         "icon": "trophy",
@@ -949,16 +959,15 @@ ACHIEVEMENTS = [
         "image": "CodeVerse.jpeg",
         "link": "CodeVerse.jpeg",
     },
-    {
-        "title": "Adobe University Hackathon – Certificate of Participation",
-        "text": "Participated in the Adobe University Hackathon organised by Adobe via Unstop, representing Silicon Institute of Technology (SIT), Bhubaneswar, Odisha. Dated 9th August 2026.",
-        "icon": "trophy",
-        "image": "adobe-hackathon.jpg",
-        "link": "adobe-hackathon.jpg",
-    },
 ]
 
 CERTIFICATIONS = [
+    {
+        "title": "AWS Data Engineering & DevOps – Industrial Training",
+        "text": "Completed an industrial training programme on AWS Data Engineering & DevOps by Ingenious-TechWorld (ITW), in association with Silicon University, Odisha. Awarded a Certificate of Appreciation (May–June 2026).",
+        "icon": "award",
+        "image": "24BCSE96_Sayon_Biswas.jpg",
+    },
     {
         "title": "Electronic Arts – Software Engineering Job Simulation",
         "text": "Completed the EA Software Engineering Job Simulation, gaining hands-on exposure to real-world software engineering workflows.",
@@ -976,12 +985,6 @@ CERTIFICATIONS = [
         "text": "Earned a certification in Python Programming and Application, validating core Python skills and practical development knowledge.",
         "icon": "award",
         "image": "Python.jpeg",
-    },
-    {
-        "title": "AWS Data Engineering & DevOps – Industrial Training",
-        "text": "Completed an industrial training programme on AWS Data Engineering & DevOps by Ingenious-TechWorld (ITW), in association with Silicon University, Odisha. Awarded a Certificate of Appreciation (May–June 2026).",
-        "icon": "award",
-        "image": "24BCSE96_Sayon_Biswas.jpg",
     },
 ]
 
