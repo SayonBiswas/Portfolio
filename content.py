@@ -647,7 +647,7 @@ PROJECTS_COMPLETED = [
         ),
 
         "github": "https://github.com/SayonBiswas/Student_Management_Website",
-        "live": "http://studentmanagement-env.eba-uup6bgvc.ap-south-2.elasticbeanstalk.com",
+        "live": "http://student-management-website-env.eba-nd3rwr2t.ap-south-2.elasticbeanstalk.com",
     },
 
     {
