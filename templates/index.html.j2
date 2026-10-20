@@ -155,33 +155,18 @@
         </div>
 
         <p class="text-label-caps" style="color: var(--orange); margin-bottom: 1.5rem;">~ ongoing</p>
-        <div class="grid-2">
-          {% for p in projects_ongoing %}
-          <div class="bento-card" style="padding: 0; overflow: hidden;">
-            <div class="project-img-wrap">
-              <div class="chip-ongoing">~ ongoing</div>
-              {% if p.difficulty %}
-              <div class="chip-difficulty" style="position: absolute; top: 1rem; right: 1rem; font-family: var(--mono); font-size: 0.65rem; background: {% if p.difficulty == 'advanced' %}var(--cyan){% elif p.difficulty == 'medium' %}var(--orange){% else %}var(--fg3){% endif %}; color: {% if p.difficulty == 'advanced' %}#000{% elif p.difficulty == 'medium' %}#000{% else %}var(--fg){% endif %}; padding: 4px 8px; border-radius: 2px;">{{ p.difficulty | upper }}</div>
-              {% endif %}
-              {% if p.image %}
-              <img src="{{ p.image }}" alt="{{ p.title }}">
-              {% else %}
-              <div class="img-placeholder">// {{ p.title }}</div>
-              {% endif %}
-              <div class="project-img-meta">
-                <span class="project-num">{{ p.number }}</span>
-                <span class="project-tech-inline">{{ p.tech | join(' / ') }}</span>
-              </div>
-            </div>
-            <div style="padding: 1.5rem;">
-              <h3 style="font-family: var(--syne); font-size: 2rem; font-weight: 700; margin-bottom: 0.75rem;">{{ p.title }}</h3>
-              <p class="text-body-md" style="color: var(--fg2); margin-bottom: 1rem;">{{ p.description }}</p>
-              <a href="project_{{ p.title | project_url }}.html" class="btn-ghost" style="font-size: 0.8rem;">
-                View case study → {{ icon('arrow-right', size=12) | safe }}
-              </a>
-            </div>
+        <div class="bento-card" style="padding: 2rem; text-align: center; background: linear-gradient(135deg, var(--surface) 0%, var(--surface-dim) 100%);">
+          <div style="display: inline-flex; align-items: center; gap: 0.5rem; background: var(--orange); color: #000; padding: 0.5rem 1rem; border-radius: 2px; font-family: var(--mono); font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1.5rem;">
+            {{ icon('clock', size=14) | safe }}
+            <span>Work in Progress</span>
           </div>
-          {% endfor %}
+          <h3 style="font-family: var(--syne); font-size: 2rem; font-weight: 700; margin-bottom: 1rem;">Ongoing Projects</h3>
+          <p class="text-body-md" style="color: var(--fg2); margin-bottom: 1.5rem; max-width: 500px; margin-left: auto; margin-right: auto;">
+            I'm currently working on {{ projects_ongoing | length }} exciting projects. Full details will be disclosed very soon!
+          </p>
+          <a href="ongoing.html" class="btn-primary">
+            View Ongoing Projects → {{ icon('arrow-right', size=12) | safe }}
+          </a>
         </div>
       </div>
     </section>

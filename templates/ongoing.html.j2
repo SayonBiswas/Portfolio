@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ongoing Projects | {{ site.title }}</title>
+<meta name="description" content="A sneak peek into my ongoing projects. Full details coming soon.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Playfair+Display:ital,wght@0,700;1,400;1,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+  .ongoing-hero {
+    padding: 6rem 0 4rem;
+    text-align: center;
+  }
+
+  .ongoing-title {
+    font-family: var(--syne);
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.02em;
+  }
+
+  .ongoing-subtitle {
+    font-family: var(--playfair);
+    font-style: italic;
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    color: var(--fg2);
+    margin-bottom: 2rem;
+  }
+
+  .coming-soon-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--orange);
+    color: #000;
+    padding: 0.5rem 1rem;
+    border-radius: 2px;
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+  }
+
+  .ongoing-message {
+    max-width: 600px;
+    margin: 0 auto;
+    color: var(--fg2);
+    font-size: 1.1rem;
+    line-height: 1.7;
+  }
+
+  .ongoing-projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 4rem;
+    padding: 0 1rem;
+  }
+
+  .ongoing-project-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    padding: 2rem;
+    transition: all 0.3s ease;
+  }
+
+  .ongoing-project-card:hover {
+    border-color: var(--fg3);
+    transform: translateY(-4px);
+  }
+
+  .ongoing-project-number {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--fg3);
+    margin-bottom: 0.5rem;
+  }
+
+  .ongoing-project-title {
+    font-family: var(--syne);
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+  }
+
+  .ongoing-project-desc {
+    color: var(--fg2);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+
+  .ongoing-project-tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1rem;
+  }
+
+  .ongoing-tech-tag {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    background: var(--fg3);
+    color: var(--fg);
+    padding: 0.25rem 0.5rem;
+    border-radius: 2px;
+  }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 4rem;
+    color: var(--fg2);
+    font-family: var(--mono);
+    font-size: 0.9rem;
+    transition: color 0.2s ease;
+  }
+
+  .back-link:hover {
+    color: var(--fg);
+  }
+
+  @media (max-width: 768px) {
+    .ongoing-hero {
+      padding: 4rem 0 2rem;
+    }
+
+    .ongoing-projects-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+</head>
+<body>
+
+<input type="checkbox" id="theme-toggle" class="visually-hidden" aria-hidden="true">
+<input type="checkbox" id="nav-toggle"   class="visually-hidden" aria-hidden="true">
+
+<div class="site">
+
+  <!-- ── Navbar ── -->
+  <nav class="navbar">
+    <div class="wrap nav-inner">
+      <a href="index.html" class="nav-logo" style="font-family: var(--syne); font-size: 1.5rem; font-weight: 800; color: var(--fg);">SB.</a>
+
+      <div class="nav-links">
+        <a href="index.html#about" style="text-transform: uppercase; font-size: 0.75rem;">About</a>
+        <a href="index.html#projects" style="text-transform: uppercase; font-size: 0.75rem;">Projects</a>
+        <a href="index.html#contact" class="btn-primary" style="margin-left: 1rem;">Let's talk →</a>
+        <label for="theme-toggle" class="icon-btn" tabindex="0" aria-label="Toggle theme" style="margin-left: 0.5rem;">
+          {{ icon('sun',  cls='theme-icon-sun',  size=15) | safe }}
+          {{ icon('moon', cls='theme-icon-moon', size=15) | safe }}
+        </label>
+      </div>
+
+      <div style="display:flex;align-items:center;gap:0.5rem;">
+        <label for="nav-toggle" class="icon-btn menu-toggle-btn" tabindex="0" aria-label="Toggle menu">
+          {{ icon('menu', cls='icon-menu', size=17) | safe }}
+          {{ icon('close', cls='icon-close', size=17) | safe }}
+        </label>
+      </div>
+    </div>
+    <div class="wrap mobile-menu">
+      <a href="index.html#about" style="text-transform: uppercase;">About</a>
+      <a href="index.html#projects" style="text-transform: uppercase;">Projects</a>
+      <a href="index.html#contact" class="btn-primary" style="margin: 0.5rem 0;">Let's talk →</a>
+      <label for="theme-toggle" class="mobile-theme-toggle" tabindex="0" aria-label="Toggle theme">
+        <span class="theme-icon-sun">{{ icon('sun', size=15) | safe }} Light Mode</span>
+        <span class="theme-icon-moon">{{ icon('moon', size=15) | safe }} Dark Mode</span>
+      </label>
+    </div>
+  </nav>
+
+  <main>
+    <!-- ── Ongoing Projects Hero ── -->
+    <section class="ongoing-hero">
+      <div class="wrap">
+        <div class="coming-soon-badge">
+          {{ icon('clock', size=14) | safe }}
+          <span>Work in Progress</span>
+        </div>
+        <h1 class="ongoing-title">Ongoing Projects</h1>
+        <p class="ongoing-subtitle">Building the future, one line at a time</p>
+        <p class="ongoing-message">
+          These projects are currently under active development. I'm working hard to bring them to life,
+          and I'll share the full details, source code, and live demos as soon as they're ready.
+          Stay tuned for exciting updates!
+        </p>
+      </div>
+    </section>
+
+    <!-- ── Ongoing Projects Grid ── -->
+    <section class="ongoing-projects-grid">
+      {% for p in projects_ongoing %}
+      <div class="ongoing-project-card">
+        <div class="ongoing-project-number">Project {{ p.number }}</div>
+        <h3 class="ongoing-project-title">{{ p.title }}</h3>
+        <p class="ongoing-project-desc">{{ p.description }}</p>
+        <div class="ongoing-project-tech">
+          {% for tech in p.tech %}
+          <span class="ongoing-tech-tag">{{ tech }}</span>
+          {% endfor %}
+        </div>
+      </div>
+      {% endfor %}
+    </section>
+
+    <!-- ── Back Link ── -->
+    <div class="wrap" style="text-align: center;">
+      <a href="index.html#projects" class="back-link">
+        {{ icon('arrow-left', size=14) | safe }}
+        Back to Projects
+      </a>
+    </div>
+  </main>
+
+  <!-- ── Footer ── -->
+  <footer class="footer">
+    <div class="wrap footer-inner">
+      <div style="flex: 1;">
+        <div style="font-family: var(--syne); font-size: 1.25rem; font-weight: 800; margin-bottom: 0.5rem;">{{ footer.name }}</div>
+        <div style="color: var(--fg2); font-size: 0.9rem;">{{ footer.tagline }}</div>
+      </div>
+      <div style="text-align: right;">
+        <div style="font-family: var(--playfair); font-style: italic; font-size: 1.1rem; margin-bottom: 0.5rem;">{{ footer.tagline_line1 }}</div>
+        <div style="font-family: var(--playfair); font-style: italic; font-size: 1.1rem;">{{ footer.tagline_line2 }}</div>
+      </div>
+    </div>
+    <div class="wrap" style="padding-top: 1rem; border-top: 1px solid var(--border); margin-top: 2rem; font-family: var(--mono); font-size: 0.75rem; color: var(--fg3);">
+      {{ footer.copyright }}
+    </div>
+  </footer>
+
+</div>
+
+<script>
+  // Theme toggle logic
+  const themeToggle = document.getElementById('theme-toggle');
+  const savedTheme = localStorage.getItem('theme');
+  if (savedTheme === 'dark') {
+    themeToggle.checked = true;
+    document.documentElement.setAttribute('data-theme', 'dark');
+  }
+
+  themeToggle.addEventListener('change', () => {
+    if (themeToggle.checked) {
+      document.documentElement.setAttribute('data-theme', 'dark');
+      localStorage.setItem('theme', 'dark');
+    } else {
+      document.documentElement.removeAttribute('data-theme');
+      localStorage.setItem('theme', 'light');
+    }
+  });
+
+  // Mobile menu toggle
+  const navToggle = document.getElementById('nav-toggle');
+  navToggle.addEventListener('change', () => {
+    document.body.style.overflow = navToggle.checked ? 'hidden' : '';
+  });
+</script>
+
+</body>
+</html>

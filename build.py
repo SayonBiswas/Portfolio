@@ -67,6 +67,16 @@ html = template.render(
 # ── Write main index.html ───────────────────────────────────────────────
 (OUTPUT / "index.html").write_text(html, encoding="utf-8")
 
+# ── Generate Ongoing Projects Page ───────────────────────────────────────
+ongoing_template = env.get_template("ongoing.html.j2")
+ongoing_html = ongoing_template.render(
+    site                = c.SITE,
+    projects_ongoing    = c.PROJECTS_ONGOING,
+    footer              = c.FOOTER,
+)
+(OUTPUT / "ongoing.html").write_text(ongoing_html, encoding="utf-8")
+print(f"📄  Generated: ongoing.html")
+
 # ── Generate Project Pages ───────────────────────────────────────────────
 project_template = env.get_template("project.html.j2")
 

@@ -889,6 +889,24 @@ PROJECTS_ONGOING = [
     },
     {
         "number": "05",
+        "title": "EV Charging Platform",
+        "difficulty": "advanced",  # "basic" | "medium" | "advanced"
+        "description": "A comprehensive EV charging management platform connecting drivers, charging stations, and grid operators with real-time monitoring and smart scheduling.",
+        "details": "Currently in development, this EV charging platform aims to revolutionize the electric vehicle charging experience. The system will enable real-time station availability monitoring, smart charging schedules, grid load balancing, and seamless payment integration. The project focuses on creating a scalable solution for the growing EV infrastructure needs.",
+        "features": [
+            "Real-time charging station availability and booking",
+            "Smart charging schedule based on grid load and pricing",
+            "User authentication and payment processing",
+            "Station operator dashboard for management",
+            "Grid integration and load balancing APIs"
+        ],
+        "tech": ["Python", "FastAPI", "PostgreSQL", "Redis", "WebSocket", "React"],
+        "github": "",
+        "live": "",
+        "image": "",
+    },
+    {
+        "number": "06",
         "title": "CodeReview",
         "difficulty": "medium",  # "basic" | "medium" | "advanced"
         "description": "A code review platform for analyzing and improving code quality through automated analysis and collaborative feedback.",
